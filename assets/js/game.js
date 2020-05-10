@@ -1,8 +1,8 @@
 /*
- *  The Chalkboard Quiz 5.00 using FETCH/JSON
+ *  The Chalkboard Quiz 5.10 using FETCH/JSON
  *  by John Pepp
  *  Started: January 14, 2020
- *  Revised: May 10, 2020 @ 9:30 AM
+ *  Revised: May 10, 2020 @ 10:30 AM
  */
 
 'use strict';
