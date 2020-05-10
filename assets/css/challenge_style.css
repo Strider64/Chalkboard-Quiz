@@ -82,10 +82,6 @@ a.btn3:hover { background-color: rgba(0, 0, 0, 0.3); }
 /* Header */
 
 header {height: 430px; background: #cf0004 url(../images/banner_1200_02.jpg) no-repeat center bottom; position: relative; }
-
-
-
-
 header div.intro { position: absolute; width: 42%; bottom: 50px; left: 5%; z-index: 1; }
 header div.intro h1 { line-height: 1em; margin: 0 0 20px 0; color: #fff;  }
 
