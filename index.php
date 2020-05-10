@@ -1,5 +1,15 @@
 <?php
 require_once 'assets/config/config.php';
+require_once "vendor/autoload.php";
+
+use Library\Email;
+use Library\Database as DB;
+
+
+$db = DB::getInstance();
+$pdo = $db->getConnection();
+
+
 $_SESSION['api_key'] = bin2hex(random_bytes(32)); // 64 characters long
 ?>
 <!DOCTYPE html>
