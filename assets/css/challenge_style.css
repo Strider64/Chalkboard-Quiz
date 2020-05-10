@@ -82,10 +82,6 @@ a.btn3:hover { background-color: rgba(0, 0, 0, 0.3); }
 /* Header */
 
 header {height: 430px; background: #cf0004 url(../images/banner_1200_02.jpg) no-repeat center bottom; position: relative; }
-
-
-
-
 header div.intro { position: absolute; width: 42%; bottom: 50px; left: 5%; z-index: 1; }
 header div.intro h1 { line-height: 1em; margin: 0 0 20px 0; color: #fff;  }
 
@@ -147,6 +143,74 @@ section #customBtn:hover {
 }
 
 section a.logo span { display: none }
+
+/* LOGIN CSS FORM */
+.login {
+    position: absolute;
+    top: 60px;
+    right: 50px;
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    background-color: rgba(255,255,255,0.30);
+    padding: 10px;
+    margin: 7px auto;
+}
+
+.login fieldset {
+    border: 2px solid #f2f2f2;
+    padding: 10px;
+}
+
+.login legend {
+    color: #F2F2F2;
+    padding: 0 5px;
+}
+
+.login label {
+    float: left;
+    display: block;
+    width: 100%;
+    max-width: 140px;
+    height: 20px;
+    color: #F2F2F2;
+}
+
+.login input { 
+    clear: right;
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    height: 20px;
+    border: none;
+    outline: none;
+    font-size: 1.0em;
+    color: #2e2e2e;
+    padding: 0 0.313em;
+    margin-bottom: 0.625em;
+}
+
+.login input[type=submit] {
+    outline: none;
+    border: none;
+    float: right;
+    display: block;
+    width: 100%;
+    max-width: 120px;
+    height: 20px;
+    cursor: pointer;
+    background-color: chocolate;
+    font-size: 1.0em;
+    color: #f2f2f2;
+    text-transform: capitalize;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+.login input[type=submit]:hover {
+    background-color: coral;
+}
+
 
 #triviaInfo { padding: 20px 50px; margin-top: 50px;  }
 #triviaInfo h2 { font-family: 'eraserregular'; font-size: 2.0em; color: #fff; }

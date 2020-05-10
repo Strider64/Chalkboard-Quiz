@@ -1,5 +1,15 @@
 <?php
 require_once 'assets/config/config.php';
+require_once "vendor/autoload.php";
+
+use Library\Email;
+use Library\Database as DB;
+
+
+$db = DB::getInstance();
+$pdo = $db->getConnection();
+
+
 $_SESSION['api_key'] = bin2hex(random_bytes(32)); // 64 characters long
 ?>
 <!DOCTYPE html>
@@ -24,6 +34,16 @@ $_SESSION['api_key'] = bin2hex(random_bytes(32)); // 64 characters long
                     <div id="startBtn">
                         <a class="logo" id="customBtn" title="Start Button" href="index.php"><span>Start Button</span></a>
                     </div>
+                    <form class="login" action="login.php" method="post">
+
+                        <input type="hidden" name="action" value="44c5913657a376274ad05bc1291e0a811bd73e59a1e67b08eb9f96b6962a7b6b">
+                        <label for="username">Username</label>
+                        <input id="username" type="text" name="username" value="" tabindex="1" autofocus="">
+                        <label for="password">Password</label>
+                        <input id="password" type="password" name="password" tabindex="2">
+                        <input type="submit" name="submit" value="enter" tabindex="3">
+
+                    </form>
                 </div>
                 <div id="quiz">
                     <form id="gameCat" action="game.php" method="post">
@@ -41,14 +61,14 @@ $_SESSION['api_key'] = bin2hex(random_bytes(32)); // 64 characters long
                             <div id="headerStyle" data-user="">
                                 <h2>Time Left: <span id="clock"></span></h2>
                             </div>
-                            
+
                             <div id="triviaSection" data-correct="">
                                 <div id="questionBox">
                                     <h2 id="question">What is the Question?</h2>
                                 </div>
                                 <div id="buttonContainer"></div>
                             </div>
-                            
+
                             <div id="playerStats">
                                 <h2 id="score">Score 0 Points</h2>
                                 <h2 id="percent">100 percent</h2>

@@ -31,21 +31,23 @@ if (empty($_SESSION['token'])) {
 date_default_timezone_set('America/Detroit');
 
 if (filter_input(INPUT_SERVER, 'SERVER_NAME', FILTER_SANITIZE_URL) == "localhost") {
-    define('PRIVATE_KEY', '6LcR8OQUAAAAAF46RBPBAV5Wf7KV5odKZ2z28GnL');
+    define('PRIVATE_KEY', '');
     define('DATABASE_HOST', 'localhost');
     define('DATABASE_NAME', 'cms');
     define('DATABASE_USERNAME', 'root');
-    define('DATABASE_PASSWORD', 'sabr1964');
+    define('DATABASE_PASSWORD', '');
     define('DATABASE_TABLE', 'members');
 } else {
-    define('PRIVATE_KEY', '6LdXNpAUAAAAAPkPQ5L1YqfrLcqkrwZXh8m33-Jg');
-    define('DATABASE_HOST', 'db2555.perfora.net');
-    define('DATABASE_NAME', 'db336894285');
-    define('DATABASE_USERNAME', 'dbo336894285');
-    define('DATABASE_PASSWORD', 'Dpsimfm1964!');
+    define('PRIVATE_KEY', '');
+    define('DATABASE_HOST', '');
+    define('DATABASE_NAME', '');
+    define('DATABASE_USERNAME', '');
+    define('DATABASE_PASSWORD', '');
     define('DATABASE_TABLE', 'members');
     
 }
+
+
 
 header("Content-Type: text/html; charset=utf-8");
 header('X-Frame-Options: SAMEORIGIN'); // Prevent Clickjacking:
