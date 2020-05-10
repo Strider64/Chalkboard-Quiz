@@ -25,15 +25,14 @@ $_SESSION['api_key'] = bin2hex(random_bytes(32)); // 64 characters long
                         <a class="logo" id="customBtn" title="Start Button" href="index.php"><span>Start Button</span></a>
                     </div>
                     <form class="login" action="login.php" method="post">
-                        <fieldset>
-                            <legend>Login Form</legend>
-                            <input type="hidden" name="action" value="44c5913657a376274ad05bc1291e0a811bd73e59a1e67b08eb9f96b6962a7b6b">
-                            <label for="username">Username</label>
-                            <input id="username" type="text" name="username" value="" tabindex="1" autofocus="">
-                            <label for="password">Password</label>
-                            <input id="password" type="password" name="password" tabindex="2">
-                            <input type="submit" name="submit" value="enter" tabindex="3">
-                        </fieldset>
+
+                        <input type="hidden" name="action" value="44c5913657a376274ad05bc1291e0a811bd73e59a1e67b08eb9f96b6962a7b6b">
+                        <label for="username">Username</label>
+                        <input id="username" type="text" name="username" value="" tabindex="1" autofocus="">
+                        <label for="password">Password</label>
+                        <input id="password" type="password" name="password" tabindex="2">
+                        <input type="submit" name="submit" value="enter" tabindex="3">
+
                     </form>
                 </div>
                 <div id="quiz">
