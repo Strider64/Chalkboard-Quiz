@@ -4,11 +4,17 @@ require_once "vendor/autoload.php";
 
 use Library\Email;
 use Library\Database as DB;
-
+use Library\Users as Login;
 
 $db = DB::getInstance();
 $pdo = $db->getConnection();
 
+$submit = filter_input(INPUT_POST, 'submit', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+if (isset($submit) && $submit === 'enter') {
+    $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_EMAIL);
+    $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $id = $login->read($username, $password);
+}
 
 $_SESSION['api_key'] = bin2hex(random_bytes(32)); // 64 characters long
 ?>
@@ -21,6 +27,7 @@ $_SESSION['api_key'] = bin2hex(random_bytes(32)); // 64 characters long
         <title>The Chalkboard Quiz</title>
         <link rel="stylesheet" type="text/css" href="assets/css/stylesheet.css">
         <link rel="stylesheet" type="text/css" href="assets/css/challenge_style.css">
+
         <script type="text/javascript"src="assets/js/game.js" defer></script>
     </head>
     <body>
@@ -34,7 +41,9 @@ $_SESSION['api_key'] = bin2hex(random_bytes(32)); // 64 characters long
                     <div id="startBtn">
                         <a class="logo" id="customBtn" title="Start Button" href="index.php"><span>Start Button</span></a>
                     </div>
-                    <form class="login" action="login.php" method="post">
+
+                    <a id="loginMessage" title="Please Login" href="login.php">Login</a>
+                    <form id="loginForm" class="login" action="index.php" method="post">
 
                         <input type="hidden" name="action" value="44c5913657a376274ad05bc1291e0a811bd73e59a1e67b08eb9f96b6962a7b6b">
                         <label for="username">Username</label>
@@ -93,5 +102,6 @@ $_SESSION['api_key'] = bin2hex(random_bytes(32)); // 64 characters long
                 Dedicated to Mildred I. Pepp (my Mom) 10-29-1928 / 02-26-2017
             </footer>
         </div>
+        <script type="text/javascript" src="assets/js/login.js"></script>
 </body>
 </html>

@@ -33,7 +33,7 @@ date_default_timezone_set('America/Detroit');
 if (filter_input(INPUT_SERVER, 'SERVER_NAME', FILTER_SANITIZE_URL) == "localhost") {
     define('PRIVATE_KEY', '6LcR8OQUAAAAAF46RBPBAV5Wf7KV5odKZ2z28GnL');
     define('DATABASE_HOST', 'localhost');
-    define('DATABASE_NAME', 'cms');
+    define('DATABASE_NAME', 'game');
     define('DATABASE_USERNAME', 'root');
     define('DATABASE_PASSWORD', 'sabr1964');
     define('DATABASE_TABLE', 'members');

@@ -144,6 +144,18 @@ section #customBtn:hover {
 
 section a.logo span { display: none }
 
+a#loginMessage {
+    position: absolute;
+    top: 80px;
+    right: 140px;
+    font-family: 'eraserregular'; 
+    font-size: 2.0em;
+    color: #f2f2f2;
+    text-decoration: none;
+}
+
+#loginForm { display: none; }
+
 /* LOGIN CSS FORM */
 .login {
     position: absolute;
