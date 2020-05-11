@@ -68,25 +68,26 @@ class Users {
     }
 
     public function read($username, $password) {
-        //echo "username " . $username . " password " . $password . "<br>";
+        
         $db = DB::getInstance();
         $pdo = $db->getConnection();
         /* Setup the Query for reading in login data from database table */
-        $this->query = 'SELECT password FROM members WHERE username=:username';
+        $this->query = 'SELECT id, password FROM members WHERE username=:username';
 
 
         $this->stmt = $pdo->prepare($this->query); // Prepare the query:
         $this->stmt->execute([':username' => $username]); // Execute the query with the supplied user's emaile:
 
-        $this->stmt->setFetchMode(PDO::FETCH_OBJ);
-        $this->password = $this->stmt->fetchColumn();
-        //echo "password: " . $this->password . "<br>";
-        if ($this->password && password_verify($password, $this->password)) {
-            unset($this->password);
+        $this->result = $this->stmt->fetch(PDO::FETCH_OBJ);
+                           
+        if ($this->result->password && password_verify($password, $this->result->password)) {
+
+            unset($this->result->password);
+            unset($password);
             session_regenerate_id();
             $lifetime = 60 * 60 * 24 * 7;
             setcookie(session_name(), session_id(), time() + $lifetime);
-            $_SESSION['username'] = $username;
+            $_SESSION['id'] = $this->result->id;
 
             // Save these values in the session, even when checks aren't enabled 
             $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
@@ -142,14 +143,14 @@ class Users {
         return $this->stmt->fetchColumn();
     }
 
-    public function username() {
+    public function username($id = 0) {
         $db = DB::getInstance();
         $pdo = $db->getConnection();
-        $this->query = "SELECT fullName FROM members WHERE username=:username";
+        $this->query = "SELECT username FROM members WHERE id=:id";
         $this->stmt = $pdo->prepare($this->query);
-        $this->stmt->execute([':username' => $_SESSION['username']]);
+        $this->stmt->execute([':id' => $id]);
         $this->user = $this->stmt->fetch(PDO::FETCH_OBJ);
-        return $this->user->fullName; // Send back Real Name of User:
+        return $this->user->username; // Send back Real Name of User:
     }
 
     public function checkSecurityCode($confirmation_code) {

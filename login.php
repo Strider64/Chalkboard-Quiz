@@ -1,7 +1,7 @@
 <?php
 require_once '../private/initialize.php';
 
-use Library\Users\Users as Login;
+use Library\Users as Login;
 
 $login = new Login;
 
