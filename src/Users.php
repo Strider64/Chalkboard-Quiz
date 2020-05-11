@@ -93,7 +93,7 @@ class Users {
             $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
             $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
             $_SESSION['last_login'] = time();
-            return true;
+            return $this->result->id;
         } else {
             return false;
         }

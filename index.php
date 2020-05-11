@@ -2,27 +2,6 @@
 require_once 'assets/config/config.php';
 require_once "vendor/autoload.php";
 
-use Library\Email;
-use Library\Database as DB;
-use Library\Users as Login;
-
-$db = DB::getInstance();
-$pdo = $db->getConnection();
-
-$result = false;
-
-$login = new Login();
-
-//$login->delete(4);
-
-$submit = filter_input(INPUT_POST, 'submit', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-if (isset($submit) && $submit === 'enter') {
-
-    $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_EMAIL);
-    $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $result = $login->read($username, $password);
-}
-
 $_SESSION['api_key'] = bin2hex(random_bytes(32)); // 64 characters long
 ?>
 <!DOCTYPE html>
@@ -48,9 +27,9 @@ $_SESSION['api_key'] = bin2hex(random_bytes(32)); // 64 characters long
                     <div id="startBtn">
                         <a class="logo" id="customBtn" title="Start Button" href="index.php"><span>Start Button</span></a>
                     </div>
-                    <?php  if (isset($result) && !$result) { ?>
+
                     <a id="loginMessage" title="Please Login" href="login.php">Login</a>
-                    <?php } ?>
+
                     <form id="loginForm" class="login" action="index.php" method="post">
 
                         <input type="hidden" name="action" value="44c5913657a376274ad05bc1291e0a811bd73e59a1e67b08eb9f96b6962a7b6b">
@@ -58,13 +37,10 @@ $_SESSION['api_key'] = bin2hex(random_bytes(32)); // 64 characters long
                         <input id="username" type="text" name="username" value="" tabindex="1" autofocus="">
                         <label for="password">Password</label>
                         <input id="password" type="password" name="password" tabindex="2">
-                        <input type="submit" name="submit" value="enter" tabindex="3">
+                        <input id="submit" type="submit" name="submit" value="enter" tabindex="3">
 
                     </form>
 
-                    <?php if (isset($result) && $result) { ?>
-                        <h2 class="welcome">Welcome <?= $login->username($_SESSION['id']); ?></h2>
-                    <?php } ?>
                 </div>
                 <div id="quiz">
                     <form id="gameCat" action="game.php" method="post">
