@@ -1,6 +1,26 @@
 <?php
 require_once 'assets/config/config.php';
 require_once "vendor/autoload.php";
+require_once 'loginFunctions.php';
+
+use Library\Database as DB;
+use Library\Users as Login;
+
+//echo "<pre>" . print_r($_SESSION, 1) . "</pre>";
+$login = new Login;
+
+$submit = filter_input(INPUT_POST, 'submit', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+if (isset($submit) && $submit === 'enter') {
+    $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_EMAIL);
+    $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $result = $login->read($username, $password);
+
+    if ($result) {
+        $_SESSION['username'] = $username;
+        header("Location: index.php");
+        exit;
+    }
+}
 
 $_SESSION['api_key'] = bin2hex(random_bytes(32)); // 64 characters long
 ?>
@@ -13,8 +33,6 @@ $_SESSION['api_key'] = bin2hex(random_bytes(32)); // 64 characters long
         <title>The Chalkboard Quiz</title>
         <link rel="stylesheet" type="text/css" href="assets/css/stylesheet.css">
         <link rel="stylesheet" type="text/css" href="assets/css/challenge_style.css">
-
-        <script type="text/javascript"src="assets/js/game.js" defer></script>
     </head>
     <body>
         <noscript>
@@ -23,58 +41,32 @@ $_SESSION['api_key'] = bin2hex(random_bytes(32)); // 64 characters long
         <div id="page">
             <section class="main">
                 <p class="banner">The Chalkboard Quiz by <a class="website" href="https://www.miniaturephotographer.com/">The Miniature Photographer</a></p>
+                <?php if (isset($_SESSION['last_login']) && $_SESSION['last_login']) { ?>
+                    <a class="logout" title="Logout of Website" href="logout.php">Logout</a>
+                <?php } ?>
                 <div id="header">
                     <div id="startBtn">
-                        <a class="logo" id="customBtn" title="Start Button" href="index.php"><span>Start Button</span></a>
+                        <a class="logo" id="customBtn" title="Start Button" href="game.php"><span>Start Button</span></a>
+                    </div>
+                    <?php if (!(isset($_SESSION['last_login']))) { ?>
+                        <a id="loginMessage" title="Please Login" href="login.php">Login</a>
+
+                        <form id="loginForm" class="login" action="index.php" method="post">
+
+                            <input type="hidden" name="action" value="44c5913657a376274ad05bc1291e0a811bd73e59a1e67b08eb9f96b6962a7b6b">
+                            <label for="username">Username</label>
+                            <input id="username" type="text" name="username" value="" tabindex="1" autofocus="">
+                            <label for="password">Password</label>
+                            <input id="password" type="password" name="password" tabindex="2">
+                            <input id="submit" type="submit" name="submit" value="enter" tabindex="3">
+
+                        </form>
+                    <?php } ?>
+
+                    <div id="loginInfo">
+                        <h3 class="welcome">Welcome to Chalkboard Quiz</h3>
                     </div>
 
-                    <a id="loginMessage" title="Please Login" href="login.php">Login</a>
-
-                    <form id="loginForm" class="login" action="index.php" method="post">
-
-                        <input type="hidden" name="action" value="44c5913657a376274ad05bc1291e0a811bd73e59a1e67b08eb9f96b6962a7b6b">
-                        <label for="username">Username</label>
-                        <input id="username" type="text" name="username" value="" tabindex="1" autofocus="">
-                        <label for="password">Password</label>
-                        <input id="password" type="password" name="password" tabindex="2">
-                        <input id="submit" type="submit" name="submit" value="enter" tabindex="3">
-
-                    </form>
-
-                </div>
-                <div id="quiz">
-                    <form id="gameCat" action="game.php" method="post">
-                        <select id="selectCat" class="select-css" name="category" tabindex="1">
-                            <option value="photography">Photography</option>
-                            <option value="movie">Movie</option>
-                            <option value="space">Space</option>
-                        </select>
-                    </form>
-                    <div id="gameTitle">
-                        <h2 class="gameTitle">Trivia Game</h2>
-                    </div>
-                    <div class="triviaContainer" data-key="<?php echo $_SESSION['api_key']; ?>" data-records=" ">             
-                        <div id="mainGame">
-                            <div id="headerStyle" data-user="">
-                                <h2>Time Left: <span id="clock"></span></h2>
-                            </div>
-
-                            <div id="triviaSection" data-correct="">
-                                <div id="questionBox">
-                                    <h2 id="question">What is the Question?</h2>
-                                </div>
-                                <div id="buttonContainer"></div>
-                            </div>
-
-                            <div id="playerStats">
-                                <h2 id="score">Score 0 Points</h2>
-                                <h2 id="percent">100 percent</h2>
-                            </div>
-                            <div id="nextStyle">
-                                <button id="next" class="nextBtn">Next</button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div id="triviaInfo">
                     <h2>Welcome to Chalkboard Quiz</h2>

@@ -103,6 +103,19 @@ section.main {
     font-size: 1.0em;
 }
 
+.logout {
+    position: absolute;
+    top: 12px;
+    right: 50px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.0em;
+}
+
+.logout:link { color: #cf0004; }
+.logout:hover { color: gold; }
+.logout:visited { color: #fff; }
+
 a.website {
     text-decoration: none;
     color: #fff;
@@ -153,7 +166,12 @@ a#loginMessage {
     color: #f2f2f2;
     text-decoration: none;
 }
-.welcome {
+
+#loginInfo {
+    display: none;
+}
+
+h3.welcome {
     position: absolute;
     top: 150px;
     right: 80px;

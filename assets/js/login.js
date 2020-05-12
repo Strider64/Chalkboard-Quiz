@@ -4,7 +4,9 @@
 const loginBtn = document.querySelector('#loginMessage');
 const   loginUrl = 'loginUser.php';
 var loginData = {},
-        submitBtn = document.querySelector('#submit');
+        submitBtn = document.querySelector('#submit'),
+        loginInfo = document.querySelector('#loginInfo'),
+        loginWelcome = document.querySelector('.welcome');
 
 /*
  * Throw error response if something is wrong: 
@@ -19,7 +21,12 @@ const handleLoginErrors = (response) => {
 /* Success function utilizing FETCH */
 const loginUISuccess = (parsedData) => {
     console.log('Login was ', parsedData);
-    console.log("loginData", loginData);
+    //console.log("loginData", loginData);
+    if (parsedData !== false ) { 
+        document.querySelector('#loginForm').style.display = "none";
+        loginInfo.style.display = 'block';
+        loginWelcome.textContent = `Welcome, ${parsedData.username}!`;
+    }
 };
 
 /* If Database Table fails to load then answer a few hard coded Q&A */
@@ -62,4 +69,4 @@ const login = (e) => {
     createLoginRequest(loginUrl, loginUISuccess, loginUIError);
 };
 
-submitBtn.addEventListener('click', login, false);
+//submitBtn.addEventListener('click', login, false);

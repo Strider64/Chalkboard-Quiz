@@ -29,7 +29,10 @@ if (isset($data['username']) && $data['password']) {
     $result = $login->read($username, $password);
     
     if ($result) {
-        output($result);
+        $_SESSION['username'] = $data['username'];
+        $data['userId'] = $result;
+        unset($data['password']);
+        output($data);
     } else {
         output(false);
     }

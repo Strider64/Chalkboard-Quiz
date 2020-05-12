@@ -391,17 +391,16 @@ const selection = (e) => {
 
 choose.addEventListener('change', selection, false);
 
-d.getElementById('triviaInfo').scrollIntoView();
+d.getElementById('page').scrollIntoView();
 
-var startBtn = d.querySelector('#startBtn');
+//var startBtn = d.querySelector('#startBtn');
 
-const startgame = (e) => {
-  e.preventDefault();
+const startgame = () => {
   d.querySelector('.gameTitle').textContent = "Photography";
-  d.querySelector('#header').style.display = "none";
-  d.querySelector('#triviaInfo').style.display = "none";
   d.querySelector('#quiz').style.display = 'block';
   selectCat('photography');
 };
 
-startBtn.addEventListener('click', startgame, false);
+startgame();
+
+//startBtn.addEventListener('click', startgame, false);
