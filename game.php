@@ -29,6 +29,9 @@ $_SESSION['api_key'] = bin2hex(random_bytes(32)); // 64 characters long
         <div id="page">
             <section class="main">
                 <p class="banner">The Chalkboard Quiz by <a class="website" href="https://www.miniaturephotographer.com/">The Miniature Photographer</a></p>
+                <?php if (isset($_SESSION['last_login']) && $_SESSION['last_login']) { ?>
+                    <a class="logout" title="Logout of Website" href="logout.php">Logout</a>
+                <?php } ?>
                 <div id="quiz">
                     <form id="gameCat" action="game.php" method="post">
                         <select id="selectCat" class="select-css" name="category" tabindex="1">
@@ -73,6 +76,6 @@ $_SESSION['api_key'] = bin2hex(random_bytes(32)); // 64 characters long
                 Dedicated to Mildred I. Pepp (my Mom) 10-29-1928 / 02-26-2017
             </footer>
         </div>
-        
+
 </body>
 </html>

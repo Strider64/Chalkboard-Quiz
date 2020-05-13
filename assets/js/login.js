@@ -1,12 +1,17 @@
 'use strict';
 
+document.querySelector('.logout').style.display = "none";
 
+const startBtn = document.querySelector('#startBtn');
 const loginBtn = document.querySelector('#loginMessage');
+const registerBtn = document.querySelector('#registerMessage');
 const   loginUrl = 'loginUser.php';
 var loginData = {},
         submitBtn = document.querySelector('#submit'),
         loginInfo = document.querySelector('#loginInfo'),
         loginWelcome = document.querySelector('.welcome');
+
+startBtn.style.visibility = "hidden"
 
 /*
  * Throw error response if something is wrong: 
@@ -23,6 +28,9 @@ const loginUISuccess = (parsedData) => {
     console.log('Login was ', parsedData);
     //console.log("loginData", loginData);
     if (parsedData !== false ) { 
+        registerBtn.style.display = "none";
+        startBtn.style.visibility = "visible";
+        document.querySelector('.logout').style.display = "block";
         document.querySelector('#loginForm').style.display = "none";
         loginInfo.style.display = 'block';
         loginWelcome.textContent = `Welcome, ${parsedData.username}!`;
@@ -52,6 +60,7 @@ const createLoginRequest = (url, succeed, fail) => {
 const loginForm = (e) => {
     e.preventDefault();
     const loginForm = document.querySelector('#loginForm');
+    registerBtn.style.display = "none";
     loginBtn.style.display = "none";
     loginForm.style.display = "block";
     loginBtn.removeEventListener('click', loginForm, false);
@@ -69,4 +78,18 @@ const login = (e) => {
     createLoginRequest(loginUrl, loginUISuccess, loginUIError);
 };
 
-//submitBtn.addEventListener('click', login, false);
+submitBtn.addEventListener('click', login, false);
+
+
+const register = (e) => {
+    e.preventDefault();
+    const registerForm = document.querySelector('#registerForm');
+
+    registerBtn.style.display = "none";
+    loginBtn.style.display = "none";
+
+    registerBtn.style.display = "none";
+    registerForm.style.display = "block";
+};
+
+registerBtn.addEventListener('click', register, false);

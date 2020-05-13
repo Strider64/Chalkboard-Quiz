@@ -41,27 +41,39 @@ $_SESSION['api_key'] = bin2hex(random_bytes(32)); // 64 characters long
         <div id="page">
             <section class="main">
                 <p class="banner">The Chalkboard Quiz by <a class="website" href="https://www.miniaturephotographer.com/">The Miniature Photographer</a></p>
-                <?php if (isset($_SESSION['last_login']) && $_SESSION['last_login']) { ?>
-                    <a class="logout" title="Logout of Website" href="logout.php">Logout</a>
-                <?php } ?>
+
+                <a class="logout" title="Logout of Website" href="logout.php">Logout</a>
+
                 <div id="header">
                     <div id="startBtn">
                         <a class="logo" id="customBtn" title="Start Button" href="game.php"><span>Start Button</span></a>
                     </div>
-                    <?php if (!(isset($_SESSION['last_login']))) { ?>
-                        <a id="loginMessage" title="Please Login" href="login.php">Login</a>
 
-                        <form id="loginForm" class="login" action="index.php" method="post">
+                    <a id="loginMessage" title="Please Login" href="login.php">Login</a>
 
-                            <input type="hidden" name="action" value="44c5913657a376274ad05bc1291e0a811bd73e59a1e67b08eb9f96b6962a7b6b">
-                            <label for="username">Username</label>
-                            <input id="username" type="text" name="username" value="" tabindex="1" autofocus="">
-                            <label for="password">Password</label>
-                            <input id="password" type="password" name="password" tabindex="2">
-                            <input id="submit" type="submit" name="submit" value="enter" tabindex="3">
+                    <form id="loginForm" class="login" action="index.php" method="post">
 
-                        </form>
-                    <?php } ?>
+                        <input type="hidden" name="action" value="44c5913657a376274ad05bc1291e0a811bd73e59a1e67b08eb9f96b6962a7b6b">
+                        <label for="username">Username</label>
+                        <input id="username" type="text" name="username" value="" tabindex="1" autofocus="">
+                        <label for="password">Password</label>
+                        <input id="password" type="password" name="password" tabindex="2">
+                        <input id="submit" type="submit" name="submit" value="enter" tabindex="3">
+
+                    </form>
+                    
+                    <a id="registerMessage" title="Please Register" href="register.php">Register</a>
+                    
+                    <form id="registerForm" class="register" action="index.php" method="post">
+
+                        
+                        <label for="rusername">Username</label>
+                        <input id="rusername" type="text" name="username" value="" tabindex="1" autofocus="">
+                        <label for="rpassword">Password</label>
+                        <input id="rpassword" type="password" name="password" tabindex="2">
+                        <input id="rsubmit" type="submit" name="submit" value="enter" tabindex="3">
+
+                    </form>
 
                     <div id="loginInfo">
                         <h3 class="welcome">Welcome to Chalkboard Quiz</h3>

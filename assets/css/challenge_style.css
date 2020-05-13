@@ -103,7 +103,7 @@ section.main {
     font-size: 1.0em;
 }
 
-.logout {
+a.logout {
     position: absolute;
     top: 12px;
     right: 50px;
@@ -112,9 +112,10 @@ section.main {
     font-size: 1.0em;
 }
 
-.logout:link { color: #cf0004; }
-.logout:hover { color: gold; }
-.logout:visited { color: #fff; }
+a.logout:link { color: #cf0004; }
+a.logout:visited { color: #fff; }
+a.logout:hover { color: gold; }
+
 
 a.website {
     text-decoration: none;
@@ -167,6 +168,16 @@ a#loginMessage {
     text-decoration: none;
 }
 
+a#registerMessage {
+    position: absolute;
+    top: 130px;
+    right: 144px;
+    font-family: 'eraserregular';
+    font-size: 1.0em;
+    color: #f2f2f2;
+    text-decoration: none;
+}
+
 #loginInfo {
     display: none;
 }
@@ -179,9 +190,10 @@ h3.welcome {
     font-size: 1.2em;
 }
 #loginForm { display: none; }
+#registerForm { display: none; }
 
-/* LOGIN CSS FORM */
-.login {
+/* LOGIN / REGISTER CSS FORM */
+.login, .register {
     position: absolute;
     top: 60px;
     right: 50px;
@@ -193,17 +205,17 @@ h3.welcome {
     margin: 7px auto;
 }
 
-.login fieldset {
+.login fieldset, .register fieldset {
     border: 2px solid #f2f2f2;
     padding: 10px;
 }
 
-.login legend {
+.login legend, .register legend {
     color: #F2F2F2;
     padding: 0 5px;
 }
 
-.login label {
+.login label, .register label {
     float: left;
     display: block;
     width: 100%;
@@ -212,7 +224,7 @@ h3.welcome {
     color: #F2F2F2;
 }
 
-.login input { 
+.login input, .register input { 
     clear: right;
     display: block;
     width: 100%;
@@ -226,7 +238,7 @@ h3.welcome {
     margin-bottom: 0.625em;
 }
 
-.login input[type=submit] {
+.login input[type=submit], .register input[type=submit] {
     outline: none;
     border: none;
     float: right;
@@ -243,7 +255,7 @@ h3.welcome {
     margin-right: 5px;
 }
 
-.login input[type=submit]:hover {
+.login input[type=submit]:hover, .register input[type=submit]:hover {
     background-color: coral;
 }
 
