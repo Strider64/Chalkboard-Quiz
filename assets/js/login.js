@@ -27,7 +27,7 @@ const loginUISuccess = (parsedData) => {
     console.log('Login was ', parsedData);
     //console.log("loginData", loginData);
     if (parsedData !== false ) { 
-        registerBtn.style.display = "none";
+        
         startBtn.style.visibility = "visible";
         document.querySelector('.logout').style.display = "block";
         document.querySelector('#loginForm').style.display = "none";
