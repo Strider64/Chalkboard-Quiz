@@ -63,17 +63,6 @@ $_SESSION['api_key'] = bin2hex(random_bytes(32)); // 64 characters long
                     </form>
                     
                     <a id="registerMessage" title="Please Register" href="register.php">Register</a>
-                    
-                    <form id="registerForm" class="register" action="index.php" method="post">
-
-                        
-                        <label for="rusername">Username</label>
-                        <input id="rusername" type="text" name="username" value="" tabindex="1" autofocus="">
-                        <label for="rpassword">Password</label>
-                        <input id="rpassword" type="password" name="password" tabindex="2">
-                        <input id="rsubmit" type="submit" name="submit" value="enter" tabindex="3">
-
-                    </form>
 
                     <div id="loginInfo">
                         <h3 class="welcome">Welcome to Chalkboard Quiz</h3>

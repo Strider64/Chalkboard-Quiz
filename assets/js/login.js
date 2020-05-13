@@ -4,7 +4,6 @@ document.querySelector('.logout').style.display = "none";
 
 const startBtn = document.querySelector('#startBtn');
 const loginBtn = document.querySelector('#loginMessage');
-const registerBtn = document.querySelector('#registerMessage');
 const   loginUrl = 'loginUser.php';
 var loginData = {},
         submitBtn = document.querySelector('#submit'),
@@ -60,7 +59,7 @@ const createLoginRequest = (url, succeed, fail) => {
 const loginForm = (e) => {
     e.preventDefault();
     const loginForm = document.querySelector('#loginForm');
-    registerBtn.style.display = "none";
+    document.querySelector('#registerMessage').style.display = "none";
     loginBtn.style.display = "none";
     loginForm.style.display = "block";
     loginBtn.removeEventListener('click', loginForm, false);
@@ -81,15 +80,3 @@ const login = (e) => {
 submitBtn.addEventListener('click', login, false);
 
 
-const register = (e) => {
-    e.preventDefault();
-    const registerForm = document.querySelector('#registerForm');
-
-    registerBtn.style.display = "none";
-    loginBtn.style.display = "none";
-
-    registerBtn.style.display = "none";
-    registerForm.style.display = "block";
-};
-
-registerBtn.addEventListener('click', register, false);

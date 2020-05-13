@@ -193,7 +193,7 @@ h3.welcome {
 #registerForm { display: none; }
 
 /* LOGIN / REGISTER CSS FORM */
-.login, .register {
+.login {
     position: absolute;
     top: 60px;
     right: 50px;
@@ -205,17 +205,17 @@ h3.welcome {
     margin: 7px auto;
 }
 
-.login fieldset, .register fieldset {
+.login fieldset {
     border: 2px solid #f2f2f2;
     padding: 10px;
 }
 
-.login legend, .register legend {
+.login legend {
     color: #F2F2F2;
     padding: 0 5px;
 }
 
-.login label, .register label {
+.login label {
     float: left;
     display: block;
     width: 100%;
@@ -224,7 +224,7 @@ h3.welcome {
     color: #F2F2F2;
 }
 
-.login input, .register input { 
+.login input { 
     clear: right;
     display: block;
     width: 100%;
@@ -238,7 +238,7 @@ h3.welcome {
     margin-bottom: 0.625em;
 }
 
-.login input[type=submit], .register input[type=submit] {
+.login input[type=submit] {
     outline: none;
     border: none;
     float: right;
@@ -255,7 +255,7 @@ h3.welcome {
     margin-right: 5px;
 }
 
-.login input[type=submit]:hover, .register input[type=submit]:hover {
+.login input[type=submit]:hover {
     background-color: coral;
 }
 
