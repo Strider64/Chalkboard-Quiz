@@ -1,12 +1,92 @@
-@font-face {
-    font-family: 'eraserregular';
-    src: url('EraserRegular-webfont.eot');
-    src: url('EraserRegular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('EraserRegular-webfont.woff') format('woff'),
-         url('EraserRegular-webfont.ttf') format('truetype'),
-         url('EraserRegular-webfont.svg#eraserregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,300i,700,700i&display=swap");
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, textarea, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
 
-}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
 
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+* {
+  box-sizing: border-box; }
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  color: #555;
+  background: url(../images/img-naturalwhite-01.png) repeat;
+  padding: 0;
+  margin: 0; }
+
+/* Text */
+h1 {
+  margin: 0 0 1em 0;
+  font-size: 2.0em;
+  font-weight: 700; }
+
+h2 {
+  margin: 0 0 .5em 0;
+  font-size: 1.6em;
+  font-weight: 700;
+  line-height: 1.1em; }
+
+h3 {
+  margin: 0 0 .5em 0;
+  font-size: 1.3em;
+  font-weight: 700; }
+
+h4 {
+  margin: 0 0 1.5em 0;
+  font-size: 1em;
+  font-weight: 700; }
+
+p {
+  margin: 0 0 1em 0; }
+
+a {
+  color: #007eff; }
+
+a:visited {
+  color: #65b1ff; }
+
+/*# sourceMappingURL=stylesheet.css.map */

@@ -391,7 +391,7 @@ const selection = (e) => {
 
 choose.addEventListener('change', selection, false);
 
-d.getElementById('page').scrollIntoView();
+d.querySelector('.main').scrollIntoView();
 
 //var startBtn = d.querySelector('#startBtn');
 
