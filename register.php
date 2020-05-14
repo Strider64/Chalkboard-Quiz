@@ -14,21 +14,34 @@ if (isset($submit) && $submit === 'enter') {
         <link rel="stylesheet" type="text/css" href="assets/css/stylesheet.css">
     </head>
     <body>
-        <section class="main">
-            <form id="register" class="span7" action="" method="post" autocomplete="on">
-                <fieldset>
-                    <legend></legend>
-                    <label for="username">username</label>
-                    <input id="username" type="text" name="data[username]" value="">
-                    <label for="password">password</label>
-                    <input id="password" type="password" name="data[password]">
-                    <label for="email">email</label>
-                    <input id="email" type="text" name="data[email]" value="">
+        <div id="registrationPage">
+            <form class="registerForm" action="" method="post" autocomplete="on">
 
-                    <input id="submit" type="submit" name="submit" value="enter">
+                <h1>Register</h1>
+                <p>Please fill in this form to create an account.</p>
+                <hr>
 
-                </fieldset>
+                <label for="username"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="data[username]" autofocus required>
+                
+                <label for="email"><b>Email</b></label>
+                <input type="text" placeholder="Enter Email" name="data[email]" required>
+
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="data[password]" required>
+
+                <label for="psw-repeat"><b>Repeat Password</b></label>
+                <input type="password" placeholder="Repeat Password" name="data[repeatPassword]" required>
+                <hr>
+
+                <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+                <button type="submit" class="registerbtn">Register</button>
+
+
+                <div class="signin">
+                    <p>Already have an account? <a href="#">Sign in</a>.</p>
+                </div>
             </form>
-        </section>
+        </div>
     </body>
 </html>
