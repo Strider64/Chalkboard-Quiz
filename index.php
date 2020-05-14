@@ -32,7 +32,6 @@ $_SESSION['api_key'] = bin2hex(random_bytes(32)); // 64 characters long
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <title>The Chalkboard Quiz</title>
         <link rel="stylesheet" type="text/css" href="assets/css/stylesheet.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/challenge_style.css">
     </head>
     <body>
         <noscript>
