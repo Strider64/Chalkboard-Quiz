@@ -32,13 +32,12 @@ $_SESSION['api_key'] = bin2hex(random_bytes(32)); // 64 characters long
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <title>The Chalkboard Quiz</title>
         <link rel="stylesheet" type="text/css" href="assets/css/stylesheet.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/challenge_style.css">
     </head>
     <body>
         <noscript>
         <h1>Sorry, but you need Javascript enabled to use this website.</h2>
         </noscript>
-        <div id="page">
+
             <section class="main">
                 <p class="banner">The Chalkboard Quiz by <a class="website" href="https://www.miniaturephotographer.com/">The Miniature Photographer</a></p>
 
@@ -82,7 +81,7 @@ $_SESSION['api_key'] = bin2hex(random_bytes(32)); // 64 characters long
                 </div>
                 Dedicated to Mildred I. Pepp (my Mom) 10-29-1928 / 02-26-2017
             </footer>
-        </div>
+      
         <script type="text/javascript" src="assets/js/login.js"></script>
 </body>
 </html>
