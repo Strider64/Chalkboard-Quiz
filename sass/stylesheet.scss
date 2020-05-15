@@ -232,6 +232,8 @@ h3.welcome {
         margin: 8px 0;
         border: none;
         cursor: pointer;
+        text-transform: capitalize;
+        font-size: 1.2em;
         width: 100%;
         opacity: 0.9;
         &:hover {

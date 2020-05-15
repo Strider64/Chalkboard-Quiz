@@ -46,21 +46,15 @@ class Users {
 
     /* This method also takes an array of data and utilizes the constructor. */
 
-    public function manually_create() {
+    public function register($data) {
         $db = DB::getInstance();
         $pdo = $db->getConnection();
-        $username = "Pepster64";
-        $fullname = "John Pepp";
-        $email = "pepster@pepster.com";
-        $password = "Dpsimfm1964!";
-        $options = [
-            'cost' => 10,
-        ];
-        $pwd = password_hash($password, PASSWORD_BCRYPT, $options);
+        
+        $pwd = password_hash($data['password'], PASSWORD_DEFAULT);
 
-        $this->query = 'INSERT INTO members (username, fullName, password, email, date_added) VALUES (:username, :fullName, :password, :email, Now())';
+        $this->query = 'INSERT INTO members (username, password, email, date_added) VALUES (:username, :password, :email, Now())';
         $this->stmt = $pdo->prepare($this->query);
-        $this->result = $this->stmt->execute([':username' => $username, ':fullName' => $fullname, ':password' => $pwd, ':email' => $email]);
+        $this->result = $this->stmt->execute([':username' => $data['username'], ':password' => $pwd, ':email' => $data['email']]);
     }
 
     public function create($data) {
