@@ -10,8 +10,12 @@ $register = new Users();
 $submit = filter_input(INPUT_POST, 'submit', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 if (isset($submit) && $submit === 'enter') {
     $data = filter_input(INPUT_POST, 'data', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_REQUIRE_ARRAY);
-    $register->register($data);
-    
+    $result = $register->register($data);
+    if ($result) {
+        $message = "Thank You";
+    } else {
+        
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -27,13 +31,13 @@ if (isset($submit) && $submit === 'enter') {
         <div id="registrationPage">
             <form class="registerForm" action="" method="post" autocomplete="on">
 
-                <h1>Register</h1>
+                <h1><?php echo (isset($message)) ? $message : 'Register'; ?></h1>
                 <p>Please fill in this form to create an account.</p>
                 <hr>
 
                 <label for="username"><b>Username</b></label>
                 <input type="text" placeholder="Enter Username" name="data[username]" autofocus required>
-                
+
                 <label for="email"><b>Email</b></label>
                 <input type="text" placeholder="Enter Email" name="data[email]" required>
 

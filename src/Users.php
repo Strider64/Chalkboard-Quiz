@@ -49,20 +49,21 @@ class Users {
     public function register($data) {
         $db = DB::getInstance();
         $pdo = $db->getConnection();
-        
-        $pwd = password_hash($data['password'], PASSWORD_DEFAULT);
 
-        $this->query = 'INSERT INTO members (username, password, email, date_added) VALUES (:username, :password, :email, Now())';
-        $this->stmt = $pdo->prepare($this->query);
-        $this->result = $this->stmt->execute([':username' => $data['username'], ':password' => $pwd, ':email' => $data['email']]);
-    }
+        if ($data['password'] === $data['repeatPassword']) {
+            $pwd = password_hash($data['password'], PASSWORD_DEFAULT);
 
-    public function create($data) {
-        
+            $this->query = 'INSERT INTO members (username, password, email, date_added) VALUES (:username, :password, :email, Now())';
+            $this->stmt = $pdo->prepare($this->query);
+            $this->result = $this->stmt->execute([':username' => $data['username'], ':password' => $pwd, ':email' => $data['email']]);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function read($username, $password) {
-        
+
         $db = DB::getInstance();
         $pdo = $db->getConnection();
         /* Setup the Query for reading in login data from database table */
@@ -73,7 +74,7 @@ class Users {
         $this->stmt->execute([':username' => $username]); // Execute the query with the supplied user's emaile:
 
         $this->result = $this->stmt->fetch(PDO::FETCH_OBJ);
-                           
+
         if ($this->result->password && password_verify($password, $this->result->password)) {
 
             unset($this->result->password);
