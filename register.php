@@ -1,7 +1,17 @@
 <?php
+require_once 'assets/config/config.php';
+require_once "vendor/autoload.php";
+require_once 'loginFunctions.php';
+
+use Library\Users;
+
+$register = new Users();
+
 $submit = filter_input(INPUT_POST, 'submit', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 if (isset($submit) && $submit === 'enter') {
     $data = filter_input(INPUT_POST, 'data', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_REQUIRE_ARRAY);
+    $register->register($data);
+    
 }
 ?>
 <!DOCTYPE html>
@@ -35,11 +45,11 @@ if (isset($submit) && $submit === 'enter') {
                 <hr>
 
                 <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-                <button type="submit" class="registerbtn">Register</button>
+                <input type="submit" name="submit" value="enter" class="registerbtn">
 
 
                 <div class="signin">
-                    <p>Already have an account? <a href="#">Sign in</a>.</p>
+                    <p>Already have an account? <a href="index.php">Sign in</a>.</p>
                 </div>
             </form>
         </div>
