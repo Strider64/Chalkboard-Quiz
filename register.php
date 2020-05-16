@@ -91,8 +91,10 @@ $submit = filter_input(INPUT_POST, 'submit', FILTER_SANITIZE_FULL_SPECIAL_CHARS)
 if (isset($submit) && $submit === 'enter') {
 
     $data = filter_input(INPUT_POST, 'data', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_REQUIRE_ARRAY);
-
-    $statusUsername = duplicateUsername($data['username'], $pdo);
+    
+    $username = trim($data['username']);
+    
+    $statusUsername = duplicateUsername($username, $pdo);
     $statusEmail = duplicateEmail($data['email'], $pdo);
 
     if ($statusUsername && !$statusEmail) {
@@ -134,8 +136,8 @@ if (isset($submit) && $submit === 'enter') {
                 <p><?php echo (isset($errPassword)) ? $errPassword : "Please fill in this form to create an account."; ?></p>
                 <hr>
 
-                <label for="username"><b>Username</b></label>
-                <input type="text" placeholder="<?php echo (isset($statusUsername)) ? "Username is not available, please re-enter!" : "Enter Username"; ?>" name="data[username]" value="<?php echo (!empty($errUsername)) ? $errUsername : Null;   ?>" autofocus required>
+                <label for="username"><b>Username <span class="unavailable"> - Not Available, please choose a different one.</span></b></label>
+                <input id="username" type="text" placeholder="<?php echo (isset($statusUsername)) ? "Username is not available, please re-enter!" : "Enter Username"; ?>" name="data[username]" value="<?php echo (!empty($errUsername)) ? $errUsername : Null;   ?>" autofocus required>
 
                 <label for="email"><b>Email</b></label>
                 <input type="text" placeholder="<?php echo (isset($statusEmail)) ? "Email is not available, please re-enter!" : "Enter Email"; ?>" name="data[email]" value="<?php echo (!empty($errEmail)) ? $errEmail : null; ?>" required>
@@ -156,5 +158,6 @@ if (isset($submit) && $submit === 'enter') {
                 </div>
             </form>
         </div>
+        <script src="assets/js/register.js"></script>
     </body>
 </html>
