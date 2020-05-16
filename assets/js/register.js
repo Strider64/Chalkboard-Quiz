@@ -1,14 +1,20 @@
 'use strict';
 
 const d = document;
-const sendUrl = 'register.php';
-
+const sendUrl = 'checkName.php';
+const unavailable = d.querySelector('.unavailable');
 var username = d.querySelector('#username');
 var checkUsername = {};
 
 /* Success function utilizing FETCH */
 const checkUISuccess = function (status) {
-    console.log(status);
+    //console.log(status);
+    
+    if (status) {
+        unavailable.style.display = "inline-block";
+    } else {
+        unavailable.style.display = "none";
+    }
 };
 
 /* If Database Table fails to update data in mysql table */
@@ -35,19 +41,19 @@ const checkRequest = (sendUrl, succeed, fail) => {
             .catch((error) => fail(error));
 };
 
-checkForDuplicate = (e) => {
+const checkForDuplicate = (e) => {
     e.preventDefault();
     checkUsername.username = username.value;
-    console.log(checkUsername);
+    //console.log(checkUsername);
     
-    saveRequest(sendUrl, checkUISuccess, checkUIError);
-}
+    checkRequest(sendUrl, checkUISuccess, checkUIError);
+};
 
 /*
  * Add an Event Listener to check for username already in 
  * database table. 
  */
 
-username.addEventListener('change', checkForDuplicate, false);
+username.addEventListener('keyup', checkForDuplicate, false);
 
 

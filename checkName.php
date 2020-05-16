@@ -25,11 +25,19 @@ function duplicateUsername($username, $pdo) {
         $row = $stmt->fetch();
         if ($row) {
             return true; // userName is in database table
+        } else {
+            return false; // Username isn't in database table
         }
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
 }
+
+$username = trim($data['username']);
+
+$status = duplicateUsername($username, $pdo);
+
+output($status);
 
 
 /*

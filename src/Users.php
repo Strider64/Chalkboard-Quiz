@@ -55,7 +55,7 @@ class Users {
 
             $this->query = 'INSERT INTO members (username, password, email, date_added) VALUES (:username, :password, :email, Now())';
             $this->stmt = $pdo->prepare($this->query);
-            $this->result = $this->stmt->execute([':username' => trim($data['username']), ':password' => $pwd, ':email' => trim($data['email'])]);
+            $this->result = $this->stmt->execute([':username' => $data['username'], ':password' => $pwd, ':email' => $data['email']]);
             return true;
         } else {
             return false;
