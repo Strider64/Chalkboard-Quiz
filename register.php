@@ -58,7 +58,7 @@ function duplicateUsername($username, $pdo) {
     try {
         $query = "SELECT 1 FROM members WHERE username = :username";
         $stmt = $pdo->prepare($query);
-        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':username', trim($username));
         $stmt->execute();
         $row = $stmt->fetch();
         if ($row) {
@@ -135,7 +135,7 @@ if (isset($submit) && $submit === 'enter') {
                 <hr>
 
                 <label for="username"><b>Username</b></label>
-                <input type="text" placeholder="<?php echo (isset($statusUsername)) ? "Username is not available, please re-enter!" : "Enter Username"; ?>" name="data[username]" value="<?php echo (!empty($errUsername)) ? $errUsername : Null;   ?>" autofocus required>
+                <input id="username" type="text" placeholder="<?php echo (isset($statusUsername)) ? "Username is not available, please re-enter!" : "Enter Username"; ?>" name="data[username]" value="<?php echo (!empty($errUsername)) ? $errUsername : Null;   ?>" autofocus required>
 
                 <label for="email"><b>Email</b></label>
                 <input type="text" placeholder="<?php echo (isset($statusEmail)) ? "Email is not available, please re-enter!" : "Enter Email"; ?>" name="data[email]" value="<?php echo (!empty($errEmail)) ? $errEmail : null; ?>" required>
@@ -156,5 +156,6 @@ if (isset($submit) && $submit === 'enter') {
                 </div>
             </form>
         </div>
+        <script src="assets/js/register.js"></script>
     </body>
 </html>
