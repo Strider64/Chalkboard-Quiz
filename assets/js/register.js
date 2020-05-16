@@ -9,7 +9,6 @@ var checkUsername = {};
 /* Success function utilizing FETCH */
 const checkUISuccess = function (status) {
     //console.log(status);
-    
     if (status) {
         unavailable.style.display = "inline-block";
     } else {
