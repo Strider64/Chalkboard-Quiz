@@ -33,7 +33,7 @@ function duplicateUsername($username, $pdo) {
 
 
 /*
- * After converting data array to JSON send back to javascript using
+ * After encoding data to JSON send back to javascript using
  * these functions.
  */
 
