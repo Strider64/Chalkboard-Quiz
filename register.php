@@ -135,10 +135,10 @@ if (isset($submit) && $submit === 'enter') {
                 <hr>
 
                 <label for="username"><b>Username</b></label>
-                <input type="text" placeholder="<?php echo ($statusUsername) ? "Username is not available, please re-enter!" : "Enter Username"; ?>" name="data[username]" value="<?php echo (!empty($errUsername)) ? $errUsername : Null;   ?>" autofocus required>
+                <input type="text" placeholder="<?php echo (isset($statusUsername)) ? "Username is not available, please re-enter!" : "Enter Username"; ?>" name="data[username]" value="<?php echo (!empty($errUsername)) ? $errUsername : Null;   ?>" autofocus required>
 
                 <label for="email"><b>Email</b></label>
-                <input type="text" placeholder="<?php echo ($statusEmail) ? "Email is not available, please re-enter!" : "Enter Email"; ?>" name="data[email]" value="<?php echo (!empty($errEmail)) ? $errEmail : null; ?>" required>
+                <input type="text" placeholder="<?php echo (isset($statusEmail)) ? "Email is not available, please re-enter!" : "Enter Email"; ?>" name="data[email]" value="<?php echo (!empty($errEmail)) ? $errEmail : null; ?>" required>
 
                 <label for="psw"><b>Password</b></label>
                 <input type="password" placeholder="Enter Password" name="data[password]" required>
