@@ -78,9 +78,10 @@ if (isset($submit) && $submit === 'enter') {
 
     if (!$statusUsername) {
         $status = confirmationNumber();
-        $sentResult = send_email($data, $status);
+        
         $result = $register->register($data, $status);
         if ($result) {
+            $sentResult = send_email($data, $status);
             $message = "Thank You";
         } else {
             $errPassword = "Passwords did not match, please re-enter";
