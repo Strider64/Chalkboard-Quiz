@@ -14,11 +14,10 @@ function confirmationNumber() {
     return $status;
 }
 
-
 function send_email(array $data, $status) {
 
-    
-    
+
+
     if (filter_input(INPUT_SERVER, 'SERVER_NAME', FILTER_SANITIZE_URL) == "localhost") {
         $comments = 'Here is you confirmation link: http://localhost/Chalkboard-Quiz/register.php?confirmation=' . $status;
     } else {
@@ -27,16 +26,10 @@ function send_email(array $data, $status) {
 
     // 25 for remote server 587 for localhost:
     /* Setup swiftmailer using your email server information */
-    if (filter_input(INPUT_SERVER, 'SERVER_NAME', FILTER_SANITIZE_URL) == "localhost") {
-        $transport = (new Swift_SmtpTransport('smtp.gmail.com',  EMAIL_PORT, 'tls'))
-                ->setUsername(EMAIL_USERNAME)
-                ->setPassword(EMAIL_PASSWORD);
-    } else {
-        $transport = (new Swift_SmtpTransport('smtp.gmail.com', 25, 'tls'))
-                ->setUsername(EMAIL_USERNAME)
-                ->setPassword(EMAIL_PASSWORD);
-    }
-    
+    $transport = (new Swift_SmtpTransport('smtp.gmail.com', EMAIL_PORT, 'tls'))
+            ->setUsername(EMAIL_USERNAME)
+            ->setPassword(EMAIL_PASSWORD);
+
 // Create the Mailer using your created Transport
     $mailer = new Swift_Mailer($transport);
 
@@ -49,9 +42,8 @@ function send_email(array $data, $status) {
 
 // Send the message
     $result = $mailer->send($message);
-    
-    return $result;
 
+    return $result;
 }
 
 $register = new Users();
