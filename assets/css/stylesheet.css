@@ -218,7 +218,7 @@ a#loginMessage {
   position: absolute;
   top: 80px;
   right: 140px;
-  font-family: 'eraserregular';
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 2.0em;
   color: #f2f2f2;
   text-decoration: none; }
@@ -227,7 +227,7 @@ a#registerMessage {
   position: absolute;
   top: 130px;
   right: 144px;
-  font-family: 'eraserregular';
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 1.0em;
   color: #f2f2f2;
   text-decoration: none; }
@@ -366,11 +366,11 @@ h3.welcome {
   padding: 20px 50px;
   margin-top: 50px; }
   #triviaInfo h2 {
-    font-family: 'eraserregular';
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 2.0em;
     color: #fff; }
   #triviaInfo p {
-    font-family: 'eraserregular';
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 1.4em;
     line-height: 1.5;
     color: #fff; }
@@ -388,7 +388,7 @@ h3.welcome {
     clear: both; }
 
 h2.gameTitle {
-  font-family: 'eraserregular', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 1.4em;
   line-height: 1.0;
   color: #fff; }
@@ -485,7 +485,7 @@ form#gameCat {
   margin: 0px; }
 
 #mainGame #headerStyle h2 {
-  font-family: 'eraserregular', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 1.4rem;
   line-height: 1.5;
   color: #fff; }
@@ -507,7 +507,7 @@ hr.hrStyle {
   border: 5px solid #fff; }
 
 #mainGame #triviaSection #questionBox h2 {
-  font-family: 'eraserregular', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 1.2em;
   line-height: 1.5;
   color: #fff;
@@ -525,7 +525,7 @@ hr.hrStyle {
   border: none;
   cursor: pointer;
   background-color: transparent;
-  font-family: 'eraserregular', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 1.0em;
   color: #fff;
   text-align: left;
@@ -542,7 +542,7 @@ hr.hrStyle {
   position: absolute;
   top: 50px;
   left: 50px;
-  font-family: 'eraserregular', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 1.2em;
   color: #fff;
   line-height: 15px; }
@@ -551,7 +551,7 @@ hr.hrStyle {
   position: absolute;
   top: 50px;
   right: 50px;
-  font-family: 'eraserregular', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 1.2em;
   color: #fff;
   line-height: 15px; }
