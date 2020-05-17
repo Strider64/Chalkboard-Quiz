@@ -1,14 +1,17 @@
 'use strict';
 
 const d = document;
-const sendUrl = 'checkName.php';
+const sendUrl = 'checkName.php'; // Name of php file:
 const unavailable = d.querySelector('.unavailable');
 var username = d.querySelector('#username');
 var checkUsername = {};
 
 /* Success function utilizing FETCH */
 const checkUISuccess = function (status) {
-    //console.log(status);
+    /*
+     * Make <span> HTML tag visible to highlight message
+     * in red.
+     */
     if (status) {
         unavailable.style.display = "inline-block";
     } else {
@@ -21,6 +24,9 @@ const checkUIError = function (error) {
     console.log("Database Table did not load", error);
 };
 
+/*
+ * Grab the status if there is an error.
+ */
 const handleSaveErrors = function (response) {
     if (!response.ok) {
         throw (response.status + ' : ' + response.statusText);
@@ -28,8 +34,11 @@ const handleSaveErrors = function (response) {
     return response.json();
 };
 
+/*
+ *  Fetch ($.get in jQuery) that basic is a simplified newer Ajax
+ *  protocol (function?). 
+ */
 const checkRequest = (sendUrl, succeed, fail) => {
-    //const data = {username: 'example'};
     fetch(sendUrl, {
         method: 'POST', // or 'PUT'
         body: JSON.stringify(checkUsername)
@@ -40,17 +49,25 @@ const checkRequest = (sendUrl, succeed, fail) => {
             .catch((error) => fail(error));
 };
 
+/*
+ *  Grab the keystrokes
+ */
 const checkForDuplicate = (e) => {
     e.preventDefault();
-    checkUsername.username = username.value;
-    //console.log(checkUsername);
+    checkUsername.username = username.value; // Put the keystrokes in object var:    
     
-    checkRequest(sendUrl, checkUISuccess, checkUIError);
+    /* 
+     *  Call the checkRequest Function using sendUrl variable as the name
+     *  of the php file that will be used to check against the database table.
+     */ 
+    
+    checkRequest(sendUrl, checkUISuccess, checkUIError); 
 };
 
 /*
  * Add an Event Listener to check for username already in 
- * database table. 
+ * database table. When the person types every keyup stroke
+ * is checked against the database table. 
  */
 
 username.addEventListener('keyup', checkForDuplicate, false);

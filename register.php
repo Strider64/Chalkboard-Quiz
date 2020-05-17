@@ -9,9 +9,17 @@ use Library\Database as DB;
 $db = DB::getInstance();
 $pdo = $db->getConnection();
 
+$register = new Users();
+
 function confirmationNumber() {
     $status = bin2hex(random_bytes(32));
     return $status;
+}
+
+$activationNumber = filter_input(INPUT_GET, 'confirmation', FILTER_SANITIZE_SPECIAL_CHARS);
+
+if (isset($activationNumber)) {
+    $result = $register->activate($activationNumber);
 }
 
 function send_email(array $data, $status) {
@@ -46,21 +54,16 @@ function send_email(array $data, $status) {
     return $result;
 }
 
-$register = new Users();
-
 function duplicateUsername($username, $pdo) {
 
-    try {
-        $query = "SELECT 1 FROM members WHERE username = :username";
-        $stmt = $pdo->prepare($query);
-        $stmt->bindParam(':username', $username);
-        $stmt->execute();
-        $row = $stmt->fetch();
-        if ($row) {
-            return true; // userName is in database table
-        }
-    } catch (PDOException $e) {
-        echo $e->getMessage();
+
+    $query = "SELECT 1 FROM members WHERE username = :username";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(':username', $username);
+    $stmt->execute();
+    $row = $stmt->fetch();
+    if ($row) {
+        return true; // userName is in database table
     }
 }
 
@@ -78,7 +81,7 @@ if (isset($submit) && $submit === 'enter') {
 
     if (!$statusUsername) {
         $status = confirmationNumber();
-        
+
         $result = $register->register($data, $status);
         if ($result) {
             $sentResult = send_email($data, $status);

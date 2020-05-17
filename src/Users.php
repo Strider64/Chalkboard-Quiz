@@ -53,13 +53,31 @@ class Users {
         if ($data['password'] === $data['repeatPassword']) {
             $pwd = password_hash($data['password'], PASSWORD_DEFAULT);
 
-            $this->query = 'INSERT INTO members (username, status, password, email, date_added) VALUES (:username, :status, :password, :email, Now())';
+            $this->query = 'INSERT INTO members (username, status, password, security, email, date_added) VALUES (:username, :status, :password, :security, :email, Now())';
             $this->stmt = $pdo->prepare($this->query);
-            $this->result = $this->stmt->execute([':username' => $data['username'], ':status' => $status, ':password' => $pwd, ':email' => $data['email']]);
+            $this->result = $this->stmt->execute([':username' => $data['username'], ':status' => $status, ':password' => $pwd, ':security' => 'newuser', ':email' => $data['email']]);
             return true;
         } else {
             return false;
         }
+    }
+    
+    public function activate($activationNumber) {
+        $db = DB::getInstance();
+        $pdo = $db->getConnection();
+
+        $this->query = 'UPDATE members SET security=:security WHERE status=:status';
+
+
+        $this->stmt = $pdo->prepare($this->query);
+        $this->result = $this->stmt->execute([':security' => 'member', ':status' => $activationNumber]);
+
+        if ($this->result) {
+            return \TRUE;
+        } else {
+            return \FALSE;
+        }
+        
     }
 
     public function read($username, $password) {
