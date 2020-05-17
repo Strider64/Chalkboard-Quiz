@@ -46,16 +46,16 @@ class Users {
 
     /* This method also takes an array of data and utilizes the constructor. */
 
-    public function register($data) {
+    public function register($data , $status) {
         $db = DB::getInstance();
         $pdo = $db->getConnection();
 
         if ($data['password'] === $data['repeatPassword']) {
             $pwd = password_hash($data['password'], PASSWORD_DEFAULT);
 
-            $this->query = 'INSERT INTO members (username, password, email, date_added) VALUES (:username, :password, :email, Now())';
+            $this->query = 'INSERT INTO members (username, status, password, email, date_added) VALUES (:username, :status, :password, :email, Now())';
             $this->stmt = $pdo->prepare($this->query);
-            $this->result = $this->stmt->execute([':username' => $data['username'], ':password' => $pwd, ':email' => $data['email']]);
+            $this->result = $this->stmt->execute([':username' => $data['username'], ':status' => $status, ':password' => $pwd, ':email' => $data['email']]);
             return true;
         } else {
             return false;

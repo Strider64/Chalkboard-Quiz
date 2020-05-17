@@ -14,7 +14,10 @@ $pdo = $db->getConnection();
  */
 $data = json_decode(file_get_contents('php://input'), true);
 
-
+/*
+ * Check to see if username already exists
+ * in the MySQL Database Table (members).
+ */
 function duplicateUsername($username, $pdo) {
 
     try {

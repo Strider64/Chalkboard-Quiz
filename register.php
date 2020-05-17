@@ -9,46 +9,49 @@ use Library\Database as DB;
 $db = DB::getInstance();
 $pdo = $db->getConnection();
 
-function send_email(array $data) {
+function confirmationNumber() {
+    $status = bin2hex(random_bytes(32));
+    return $status;
+}
 
+
+function send_email(array $data, $status) {
+
+    
+    
+    if (filter_input(INPUT_SERVER, 'SERVER_NAME', FILTER_SANITIZE_URL) == "localhost") {
+        $comments = 'Here is you confirmation link: http://localhost/Chalkboard-Quiz/register.php?confirmation=' . $status;
+    } else {
+        $comments = 'Here is you confirmation link: https://chalkboardquiz.com/activate.php?confirmation=' . $status;
+    }
+
+    // 25 for remote server 587 for localhost:
     /* Setup swiftmailer using your email server information */
     if (filter_input(INPUT_SERVER, 'SERVER_NAME', FILTER_SANITIZE_URL) == "localhost") {
-        $transport = Swift_SmtpTransport::newInstance(EMAIL_HOST, EMAIL_PORT); // 25 for remote server 587 for localhost:
+        $transport = (new Swift_SmtpTransport('smtp.gmail.com',  EMAIL_PORT, 'tls'))
+                ->setUsername(EMAIL_USERNAME)
+                ->setPassword(EMAIL_PASSWORD);
     } else {
-        $transport = Swift_SmtpTransport::newInstance(EMAIL_HOST, 25);
+        $transport = (new Swift_SmtpTransport('smtp.gmail.com', 25, 'tls'))
+                ->setUsername(EMAIL_USERNAME)
+                ->setPassword(EMAIL_PASSWORD);
     }
+    
+// Create the Mailer using your created Transport
+    $mailer = new Swift_Mailer($transport);
 
-    $transport->setUsername(EMAIL_USERNAME);
-    $transport->setPassword(EMAIL_PASSWORD);
+// Create a message
+    $message = (new Swift_Message('Confirmation Number'))
+            ->setFrom(['jrpepp@pepster' => 'John Pepp'])
+            ->setTo([$data['email'] => $data['username']])
+            ->setBody($comments)
+    ;
 
-    /* Setup To, From, Subject and Message */
-    $message = Swift_Message::newInstance();
+// Send the message
+    $result = $mailer->send($message);
+    
+    return $result;
 
-    $email_from = 'jrpepp2014@jrpepp.com';
-    if (filter_input(INPUT_SERVER, 'SERVER_NAME', FILTER_SANITIZE_URL) == "localhost") {
-        $comments = 'Here is you confirmation link: http://localhost/Chalkboard-Quiz/register.php?confirmation=' . $data['confirmation'];
-    } else {
-        $comments = 'Here is you confirmation link: https://chalkboardquiz.com/activate.php?confirmation=' . $data['confirmation'];
-    }
-    $message->setTo([
-        $data['email'] => $data['name']
-    ]);
-
-    $subject = "Chalkboard Email Verification";
-
-    $message->setSubject($subject); // Subject:
-    $message->setBody($comments); // Message:
-    $message->setFrom($email_from, 'Chalkboarde Quiz'); // From and Name:
-
-    $mailer = Swift_Mailer::newInstance($transport); // Setting up mailer using transport info that was provided:
-    $result = $mailer->send($message, $failedRecipients);
-
-    if ($result) {
-        return TRUE;
-    } else {
-        echo "<pre>" . print_r($failedRecipients, 1) . "</pre>";
-        return FALSE;
-    }
 }
 
 $register = new Users();
@@ -69,27 +72,28 @@ function duplicateUsername($username, $pdo) {
     }
 }
 
-
 $submit = filter_input(INPUT_POST, 'submit', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
 
 if (isset($submit) && $submit === 'enter') {
 
     $data = filter_input(INPUT_POST, 'data', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_REQUIRE_ARRAY);
-    
+
     $username = trim($data['username']);
-    
+
     $statusUsername = duplicateUsername($username, $pdo);
 
 
     if (!$statusUsername) {
-        $result = $register->register($data);
+        $status = confirmationNumber();
+        $sentResult = send_email($data, $status);
+        $result = $register->register($data, $status);
         if ($result) {
             $message = "Thank You";
         } else {
             $errPassword = "Passwords did not match, please re-enter";
         }
-    } 
+    }
 }
 ?>
 <!DOCTYPE html>
