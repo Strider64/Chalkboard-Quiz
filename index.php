@@ -70,7 +70,7 @@ $_SESSION['api_key'] = bin2hex(random_bytes(32)); // 64 characters long
                 </div>
                 <div id="triviaInfo">
                     <h2>Welcome to Chalkboard Quiz</h2>
-                    <p>This is a JavaScript Quiz that is fun and educational. Many improvements will be taking place in the next couple of weeks, such as a high score table, user login, add/edit questions and many other new features will be added to the game. In the meantime try out the fully functional quiz game by pressing the START button.</p>
+                    <p>This is a JavaScript Quiz that is fun and educational. Many improvements are starting to take place, such as a login/registration that is almost done. It's a simple registration process that will bring many new features to the quiz and I give my word that I will never sell or give your email address to a 3rd Party. I will be setting up a guest account for those who still refuse to register, but a lot of the features will not available to the guess account. Setting up a login will enable me to take "The Chalkboard Quiz" to the next level, so I recommend that everyone register. I will be updating this quiz in the weeks to follow, so please check back from time to time where I will give details about the new features that are added. So in the meantime, please register and login. When you login a big blue/green start button will appear that once clicked will take you to the quiz.</p>
                 </div>
             </section> <!-- End of Section -->
             <footer>

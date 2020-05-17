@@ -82,7 +82,8 @@ if (isset($submit) && $submit === 'enter') {
         $result = $register->register($data, $status);
         if ($result) {
             $sentResult = send_email($data, $status);
-            $message = "Thank You";
+            unset($data);
+            $message = "Thank You for Registering!";
         } else {
             $errPassword = "Passwords did not match, please re-enter";
         }
