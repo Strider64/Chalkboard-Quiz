@@ -242,9 +242,7 @@ h3.welcome {
   color: #f2f2f2;
   font-size: 1.2em; }
 
-#loginForm {
-  display: none; }
-
+/*#loginForm { display: none; }*/
 /* Registration Form */
 #registrationPage {
   display: block;
@@ -256,6 +254,40 @@ h3.welcome {
   background: #cf0004 url(../images/bg-chalkboard-02.jpg) no-repeat center bottom;
   padding: 50px 10px;
   margin: 10px auto; }
+
+.contentStyle {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  height: 75em;
+  background: #cf0004 url(../images/bg-chalkboard-02.jpg) no-repeat center bottom;
+  padding: 50px 0px;
+  margin: 10px auto; }
+  .contentStyle .banner2 {
+    position: absolute;
+    top: 12px;
+    left: 25px;
+    color: #fff;
+    font-size: 1.0em; }
+
+.textMessageBox {
+  display: block;
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  background-color: #fff;
+  padding: 16px;
+  margin: 300px auto; }
+  .textMessageBox h1 {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-size: 1.6em;
+    line-height: 1.0;
+    color: #2e2e2e; }
+  .textMessageBox p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.2em;
+    line-height: 1.2;
+    color: #2e2e2e; }
 
 .unavailable {
   display: none;

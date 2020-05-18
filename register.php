@@ -16,47 +16,40 @@ function confirmationNumber() {
     return $status;
 }
 
-$activationNumber = filter_input(INPUT_GET, 'confirmation', FILTER_SANITIZE_SPECIAL_CHARS);
-
-if (isset($activationNumber)) {
-    $result = $register->activate($activationNumber);
-}
+/*
+ * Send Activation number to activate.php page
+ */
 
 function send_email(array $data, $status) {
 
-
-
     if (filter_input(INPUT_SERVER, 'SERVER_NAME', FILTER_SANITIZE_URL) == "localhost") {
-        $comments = 'Here is you confirmation link: http://localhost/Chalkboard-Quiz/register.php?confirmation=' . $status;
+        $comments = 'Here is you confirmation link: http://localhost/Chalkboard-Quiz/activate.php?confirmation=' . $status;
     } else {
         $comments = 'Here is you confirmation link: https://chalkboardquiz.com/activate.php?confirmation=' . $status;
     }
 
-    // 25 for remote server 587 for localhost:
     /* Setup swiftmailer using your email server information */
     $transport = (new Swift_SmtpTransport('smtp.gmail.com', EMAIL_PORT, 'tls'))
             ->setUsername(EMAIL_USERNAME)
             ->setPassword(EMAIL_PASSWORD);
 
-// Create the Mailer using your created Transport
-    $mailer = new Swift_Mailer($transport);
 
-// Create a message
+    $mailer = new Swift_Mailer($transport); // Create the Mailer using your created Transport
+
+    /* create message */
     $message = (new Swift_Message('Confirmation Number'))
             ->setFrom(['jrpepp@pepster' => 'John Pepp'])
             ->setTo([$data['email'] => $data['username']])
             ->setBody($comments)
     ;
 
-// Send the message
+    /* Send the message */
     $result = $mailer->send($message);
 
     return $result;
 }
 
 function duplicateUsername($username, $pdo) {
-
-
     $query = "SELECT 1 FROM members WHERE username = :username";
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(':username', $username);
@@ -86,7 +79,8 @@ if (isset($submit) && $submit === 'enter') {
         if ($result) {
             $sentResult = send_email($data, $status);
             unset($data);
-            $message = "Thank You for Registering!";
+            header("Location: success.php");
+            exit;
         } else {
             $errPassword = "Passwords did not match, please re-enter";
         }
@@ -103,6 +97,9 @@ if (isset($submit) && $submit === 'enter') {
         <link rel="stylesheet" type="text/css" href="assets/css/stylesheet.css">
     </head>
     <body>
+        <noscript>
+        <h1>Sorry, but you need Javascript enabled to use this website.</h1>
+        </noscript>
         <div id="registrationPage">
             <form class="registerForm" action="" method="post" autocomplete="on">
 
