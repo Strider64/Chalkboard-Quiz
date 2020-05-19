@@ -21,7 +21,7 @@ $data = json_decode(file_get_contents('php://input'), true);
 function duplicateUsername($username, $pdo) {
 
     try {
-        $query = "SELECT 1 FROM members WHERE username = :username";
+        $query = "SELECT 1 FROM users WHERE username = :username";
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(':username', $username);
         $stmt->execute();
