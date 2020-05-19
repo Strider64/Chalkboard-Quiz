@@ -46,20 +46,53 @@ class Users {
 
     /* This method also takes an array of data and utilizes the constructor. */
 
-    public function register($data) {
+    public function register($data, $status) {
         $db = DB::getInstance();
         $pdo = $db->getConnection();
 
         if ($data['password'] === $data['repeatPassword']) {
             $pwd = password_hash($data['password'], PASSWORD_DEFAULT);
 
-            $this->query = 'INSERT INTO members (username, password, email, date_added) VALUES (:username, :password, :email, Now())';
+            $this->query = 'INSERT INTO members (username, status, password, security, email, date_added) VALUES (:username, :status, :password, :security, :email, Now())';
             $this->stmt = $pdo->prepare($this->query);
-            $this->result = $this->stmt->execute([':username' => $data['username'], ':password' => $pwd, ':email' => $data['email']]);
+            $this->result = $this->stmt->execute([':username' => $data['username'], ':status' => $status, ':password' => $pwd, ':security' => 'newuser', ':email' => $data['email']]);
             return true;
         } else {
             return false;
         }
+    }
+
+    public function activate($username, $password, $status) {
+        $db = DB::getInstance();
+        $pdo = $db->getConnection();
+
+        /* Setup the Query for reading in login data from database table */
+        $this->query = 'SELECT id, status, password FROM members WHERE username = :username and security = "newuser"';
+
+
+        $this->stmt = $pdo->prepare($this->query); // Prepare the query:
+        $this->stmt->execute([':username' => $username]); // Execute the query with the supplied user's emaile:
+
+        $this->result = $this->stmt->fetch(PDO::FETCH_OBJ);
+        
+        if (!$this->result) {
+            header("Location: index.php");
+            exit();
+        }
+        
+        if (isset($this->result->password) && password_verify($password, $this->result->password) && $this->result->status === $status) {
+            unset($this->result->password);
+            unset($password);
+            $this->query = 'UPDATE members SET status=:status, security=:security WHERE id=:id';
+            $this->stmt = $pdo->prepare($this->query);
+            $this->result = $this->stmt->execute([':security' => 'member', ':status' => $this->generateSalt(), ':id' => $this->result->id]);
+
+            if ($this->result) {
+                return \TRUE;
+            } else {
+                return \FALSE;
+            }
+        } 
     }
 
     public function read($username, $password) {

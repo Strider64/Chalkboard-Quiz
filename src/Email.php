@@ -1,13 +1,14 @@
 <?php
 
 namespace Library;
+
 /*
  * In order to use swiftmailer the below is needed....
  */
+
 use Swift_SmtpTransport;
 use Swift_Message;
 use Swift_Mailer;
-
 
 class Email {
 
@@ -31,17 +32,19 @@ class Email {
         /* Setup To, From, Subject and Message */
         $message = Swift_Message::newInstance();
 
-        $name = $data['name'];
-        $email_from = $data['email'];
-        $subject = $data['reason'] . ' email address ' . $data['email'];
-        $comments = $data['phone'] . ' ' . $data['website'] . ' ' . $data['comments'];
-
+        $name = 'John Pepp';
+        $email_from = 'jrpepp@pepster.com';
+        $subject = "Activate User Account";
+        
+        if (filter_input(INPUT_SERVER, 'SERVER_NAME', FILTER_SANITIZE_URL) == "localhost") {
+            $comments = 'Here is you confirmation link: http://localhost/Chalkboard-Quiz/register.php?confirmation=' . $data['status'];
+        } else {
+            $comments = 'Here is you confirmation link: https://chalkboardquiz.com/activate.php?confirmation=' . $data['status'];
+        }
         /*
          * Email Address message is going to
          */
-        $message->setTo([
-           'jrpepp@pepster.com' => 'John Pepp'// jrpepp@pepster.com || John Pepp
-        ]);
+        $message->setTo(['jrpepp@pepster.com', 'jrpepp@pepster.com' => 'John Pepp']);
 
         $message->setSubject($subject); // Subject:
         $message->setBody($comments); // Message:

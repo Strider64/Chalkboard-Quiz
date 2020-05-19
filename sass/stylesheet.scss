@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,700,700i&display=swap');
 @import "partials/reset";
 @import "partials/fontStyle";
+@import "partials/fonts";
 
 body {
     font-family: 'Open Sans', sans-serif; 
@@ -109,7 +110,7 @@ a.logout {
     text-decoration: none;
     color: #fff;
     font-size: 1.0em;
-    &:link { color: #cf0004; }
+    &:link { color: #fff; }
     &:visited { color: #fff; }
     &:hover { color: gold; }
 }
@@ -118,7 +119,7 @@ a.website {
     text-decoration: none;
     color: #fff;
     font-family: Arial, sans-serif;
-    &:link { color: #cf0004; }
+    &:link { color: #fff; }
     &:visited { color: #fff; }
     &:hover { color: gold; }    
 }
@@ -156,7 +157,7 @@ a#loginMessage {
     position: absolute;
     top: 80px;
     right: 140px;
-    font-family: 'eraserregular'; 
+    font-family: $font1; 
     font-size: 2.0em;
     color: #f2f2f2;
     text-decoration: none;
@@ -166,7 +167,7 @@ a#registerMessage {
     position: absolute;
     top: 130px;
     right: 144px;
-    font-family: 'eraserregular';
+    font-family: $font1;
     font-size: 1.0em;
     color: #f2f2f2;
     text-decoration: none;
@@ -183,7 +184,7 @@ h3.welcome {
     color: #f2f2f2;
     font-size: 1.2em;
 }
-#loginForm { display: none; }
+/*#loginForm { display: none; }*/
 
 /* Registration Form */
 #registrationPage {
@@ -194,6 +195,45 @@ h3.welcome {
     background: #cf0004 url(../images/bg-chalkboard-02.jpg) no-repeat center bottom; 
     padding: 50px 10px;
     margin: 10px auto;
+}
+
+.contentStyle {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    height: 75em;
+    background: #cf0004 url(../images/bg-chalkboard-02.jpg) no-repeat center bottom;
+    padding: 50px 0px;
+    margin: 10px auto;
+    .banner2 {
+        position: absolute;
+        top: 12px;
+        left: 25px;
+        color: #fff;
+        font-size: 1.0em;
+    }
+}
+
+.textMessageBox {
+    display: block;
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    background-color: #fff;
+    padding: 16px;
+    margin: 300px auto;
+    h1 {
+        font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+        font-size: 1.6em;
+        line-height: 1.0;
+        color: #2e2e2e;
+    }
+    p {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1.2em;
+        line-height: 1.2;
+        color: #2e2e2e;
+    }
 }
 
 .unavailable { display: none; color: #cf0004; font-style: italic; }
@@ -323,12 +363,12 @@ h3.welcome {
     padding: 20px 50px; 
     margin-top: 50px;  
     h2 { 
-        font-family: 'eraserregular'; 
+        font-family: $font1; 
         font-size: 2.0em; 
         color: #fff; 
     }
     p { 
-        font-family: 'eraserregular'; 
+        font-family: $font1; 
         font-size: 1.4em; 
         line-height: 1.5; 
         color: #fff; 
@@ -350,7 +390,7 @@ h3.welcome {
 }
 
 h2.gameTitle {
-    font-family: 'eraserregular', sans-serif;
+    font-family: $font1;
     font-size: 1.4em;
     line-height: 1.0;
     color: #fff;
@@ -448,7 +488,7 @@ form#gameCat {
 }
 
 #mainGame #headerStyle h2 {
-    font-family: 'eraserregular', sans-serif;
+    font-family: $font1;
     font-size: 1.4rem;
     line-height: 1.5;
     color: #fff;
@@ -475,7 +515,7 @@ hr.hrStyle {
 
 
 #mainGame #triviaSection #questionBox h2 {
-    font-family: 'eraserregular', sans-serif;
+    font-family: $font1;
     font-size: 1.2em;
     line-height: 1.5;
     color: #fff;
@@ -492,7 +532,7 @@ hr.hrStyle {
     border: none;
     cursor: pointer;
     background-color: rgba(0, 0, 0, 0.0);
-    font-family: 'eraserregular', sans-serif;
+    font-family: $font1;
     font-size: 1.0em;
     color: #fff;
     text-align: left;
@@ -511,7 +551,7 @@ hr.hrStyle {
     position: absolute;
     top: 50px;
     left: 50px;
-    font-family: 'eraserregular', sans-serif;
+    font-family: $font1;
     font-size: 1.2em;
     color: #fff;
     line-height: 15px;
@@ -521,7 +561,7 @@ hr.hrStyle {
     position: absolute;
     top: 50px;
     right: 50px;
-    font-family: 'eraserregular', sans-serif;
+    font-family: $font1;
     font-size: 1.2em;
     color: #fff;
     line-height: 15px;
