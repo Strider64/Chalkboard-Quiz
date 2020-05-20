@@ -59,7 +59,7 @@ class Users {
             $this->result = $this->stmt->execute([':username' => $data['username'], ':status' => $status, ':password' => $this->pwd, ':security' => 'newuser', ':email' => $data['email']]);
         } catch (\PDOException $e) {
 
-            echo "unique index" . $e->errorInfo[1] . "<br>";
+            //echo "unique index" . $e->errorInfo[1] . "<br>";
             // an error occurred
             /*   if the error number is for something that this code is designed to handle, i.e. a duplicate index, handle it by telling the user what was wrong with the data they submitted
               // failure due to a specific error number that can be recovered from by the visitor submitting a different value

@@ -1,13 +1,15 @@
 'use strict';
 
 const d = document;
-const sendUrl = 'checkName.php'; // Name of php file:
+
 const unavailable = d.querySelector('.unavailable');
+const recommendation = d.querySelector('.recommendation');
 var username = d.querySelector('#username');
-var checkUsername = {};
+var password = d.querySelector('#password');
+var data = {};
 
 /* Success function utilizing FETCH */
-const checkUISuccess = function (status) {
+const duplicateUISuccess = function (status) {
     /*
      * Make <span> HTML tag visible to highlight message
      * in red.
@@ -20,9 +22,24 @@ const checkUISuccess = function (status) {
 };
 
 /* If Database Table fails to update data in mysql table */
-const checkUIError = function (error) {
+const duplicateUIError = function (error) {
     console.log("Database Table did not load", error);
 };
+
+
+const passwordUISuccess = function(status) {
+    if (status === "Strong") {
+        recommendation.style['color'] = 'green';
+    } else {
+        recommendation.style['color'] = 'red';
+    }
+    recommendation.textContent = status;
+};
+
+const passwordUIError = (error) => {
+  console.log("Database Table did not load", error);  
+};
+
 
 /*
  * Grab the status if there is an error.
@@ -41,7 +58,7 @@ const handleSaveErrors = function (response) {
 const checkRequest = (sendUrl, succeed, fail) => {
     fetch(sendUrl, {
         method: 'POST', // or 'PUT'
-        body: JSON.stringify(checkUsername)
+        body: JSON.stringify(data)
 
     })
             .then((response) => handleSaveErrors(response))
@@ -54,14 +71,15 @@ const checkRequest = (sendUrl, succeed, fail) => {
  */
 const checkForDuplicate = (e) => {
     e.preventDefault();
-    checkUsername.username = username.value; // Put the keystrokes in object var:    
+    const sendUrl = 'checkName.php'; // Name of php file:
+    data.username = username.value; // Put the keystrokes in object var:    
     
     /* 
      *  Call the checkRequest Function using sendUrl variable as the name
      *  of the php file that will be used to check against the database table.
      */ 
     
-    checkRequest(sendUrl, checkUISuccess, checkUIError); 
+    checkRequest(sendUrl, duplicateUISuccess, duplicateUIError); 
 };
 
 /*
@@ -72,4 +90,11 @@ const checkForDuplicate = (e) => {
 
 username.addEventListener('keyup', checkForDuplicate, false);
 
+const strongPassword = (e) => {
+    e.preventDefault();
+    const sendUrl = 'strongPassword.php';
+    data.password = password.value;
+    checkRequest(sendUrl, passwordUISuccess, passwordUIError);
+};
 
+password.addEventListener('keyup', strongPassword, false);

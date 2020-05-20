@@ -125,8 +125,8 @@ if (isset($submit) && $submit === 'enter') {
                 <label for="email"><?php echo (isset($errEmail)) ? $errEmail : "<b>Email</b>"; ?></label>
                 <input type="email" placeholder="Enter Email" name="data[email]" value="<?php echo (isset($data['email'])) ? $data['email'] : null; ?>" required>
 
-                <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="data[password]" required>
+                <label for="psw"><b>Password <span class="recommendation">recommendation at least (8 characters long, 1 uppercasse letter, 1 number, and 1 special character)</span></b></label>
+                <input id="password" type="password" placeholder="Enter Password" name="data[password]" required>
 
                 <label for="psw-repeat"><b>Repeat Password</b></label>
                 <input type="password" placeholder="Repeat Password" name="data[repeatPassword]" required>
