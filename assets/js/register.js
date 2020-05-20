@@ -29,9 +29,9 @@ const duplicateUIError = function (error) {
 
 const passwordUISuccess = function(status) {
     if (status === "Strong") {
-        recommendation.style['color'] = 'green';
+        recommendation.style.cssText = "color: green; font-size: 1.0em; font-weight: bold;";
     } else {
-        recommendation.style['color'] = 'red';
+        recommendation.style.cssText = "color: red; font-size: 0.8em; font-weight: normal;";
     }
     recommendation.textContent = status;
 };
