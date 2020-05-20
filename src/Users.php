@@ -12,6 +12,7 @@ class Users {
     private $connectPDO;
     private $pdo;
     private $password = \NULL;
+    private $pwd = \NULL;
     protected $id = NULL;
     protected $query = NULL;
     protected $stmt = NULL;
@@ -25,6 +26,7 @@ class Users {
     public $user = NULL;
     public $userArray = [];
     public $username = NULL;
+    public $duplicate = "duplicate";
 
     /* Create (Insert) new users information */
 
@@ -49,17 +51,34 @@ class Users {
     public function register($data, $status) {
         $db = DB::getInstance();
         $pdo = $db->getConnection();
-
-        if ($data['password'] === $data['repeatPassword']) {
-            $pwd = password_hash($data['password'], PASSWORD_DEFAULT);
-
-            $this->query = 'INSERT INTO members (username, status, password, security, email, date_added) VALUES (:username, :status, :password, :security, :email, Now())';
+        $this->pwd = password_hash($data['password'], PASSWORD_DEFAULT);
+        unset($data['password']); // $this-pwd is private argument/variable:
+        try {
+            $this->query = 'INSERT INTO users (username, status, password, security, email, date_added) VALUES (:username, :status, :password, :security, :email, Now())';
             $this->stmt = $pdo->prepare($this->query);
-            $this->result = $this->stmt->execute([':username' => $data['username'], ':status' => $status, ':password' => $pwd, ':security' => 'newuser', ':email' => $data['email']]);
-            return true;
-        } else {
-            return false;
+            $this->result = $this->stmt->execute([':username' => $data['username'], ':status' => $status, ':password' => $this->pwd, ':security' => 'newuser', ':email' => $data['email']]);
+        } catch (\PDOException $e) {
+
+            //echo "unique index" . $e->errorInfo[1] . "<br>";
+            // an error occurred
+            /*   if the error number is for something that this code is designed to handle, i.e. a duplicate index, handle it by telling the user what was wrong with the data they submitted
+              // failure due to a specific error number that can be recovered from by the visitor submitting a different value
+              return false;
+              else
+              // the error is for something else, either due to a programming mistake or not validating input data properly, that the visitor cannot do anything about or needs to know about
+              throw $e; // re-throw the exception and let the next higher exception handler, php in this case, catch and handle it
+             * 
+             */
+            if ($e->errorInfo[1] === 1062) {
+                return false;
+            } else {
+                throw $e;
+            }
+        } catch (Exception $e) {
+            echo 'Caught exception: ', $e->getMessage(), "\n";
         }
+
+        return true;
     }
 
     public function activate($username, $password, $status) {
@@ -67,23 +86,23 @@ class Users {
         $pdo = $db->getConnection();
 
         /* Setup the Query for reading in login data from database table */
-        $this->query = 'SELECT id, status, password FROM members WHERE username = :username and security = "newuser"';
+        $this->query = 'SELECT id, status, password FROM users WHERE username = :username and security = "newuser"';
 
 
         $this->stmt = $pdo->prepare($this->query); // Prepare the query:
         $this->stmt->execute([':username' => $username]); // Execute the query with the supplied user's emaile:
 
         $this->result = $this->stmt->fetch(PDO::FETCH_OBJ);
-        
+
         if (!$this->result) {
             header("Location: index.php");
             exit();
         }
-        
+
         if (isset($this->result->password) && password_verify($password, $this->result->password) && $this->result->status === $status) {
             unset($this->result->password);
             unset($password);
-            $this->query = 'UPDATE members SET status=:status, security=:security WHERE id=:id';
+            $this->query = 'UPDATE users SET status=:status, security=:security WHERE id=:id';
             $this->stmt = $pdo->prepare($this->query);
             $this->result = $this->stmt->execute([':security' => 'member', ':status' => $this->generateSalt(), ':id' => $this->result->id]);
 
@@ -92,7 +111,7 @@ class Users {
             } else {
                 return \FALSE;
             }
-        } 
+        }
     }
 
     public function read($username, $password) {
@@ -100,7 +119,7 @@ class Users {
         $db = DB::getInstance();
         $pdo = $db->getConnection();
         /* Setup the Query for reading in login data from database table */
-        $this->query = 'SELECT id, password FROM members WHERE username=:username';
+        $this->query = 'SELECT id, password FROM users WHERE username=:username';
 
 
         $this->stmt = $pdo->prepare($this->query); // Prepare the query:
@@ -127,40 +146,6 @@ class Users {
         }
     }
 
-    public function facebook($username) {
-        session_regenerate_id();
-        $lifetime = 60 * 60 * 24 * 7;
-        setcookie(session_name(), session_id(), time() + $lifetime);
-        $_SESSION['username'] = $username;
-
-        // Save these values in the session, even when checks aren't enabled 
-        $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
-        $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
-        $_SESSION['last_login'] = time();
-    }
-
-    public function secureRead($email, $password) {
-        $stored_salt = $this->retrieveSalt($email);
-        $db = DB::getInstance();
-        $pdo = $db->getConnection();
-        $this->query = 'SELECT id FROM members WHERE email=:email AND password=:password';
-
-
-        $this->stmt = $pdo->prepare($this->query); // Prepare the query:
-        $this->stmt->execute([
-            ':email' => $email,
-            ':password' => hash('whirlpool', $stored_salt . $password)
-        ]); // Execute the query with the supplied user's parameter(s):
-
-        $this->stmt->setFetchMode(PDO::FETCH_OBJ);
-        unset($stored_salt, $password);
-        if ($this->user_id = $this->stmt->fetchColumn()) {
-            return $this->user_id;
-        } else {
-            return FALSE;
-        }
-    }
-
     private function retrieveSalt($email) {
         $db = DB::getInstance();
         $pdo = $db->getConnection();
@@ -174,7 +159,7 @@ class Users {
     public function username($id = 0) {
         $db = DB::getInstance();
         $pdo = $db->getConnection();
-        $this->query = "SELECT username FROM members WHERE id=:id";
+        $this->query = "SELECT username FROM users WHERE id=:id";
         $this->stmt = $pdo->prepare($this->query);
         $this->stmt->execute([':id' => $id]);
         $this->user = $this->stmt->fetch(PDO::FETCH_OBJ);

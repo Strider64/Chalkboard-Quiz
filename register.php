@@ -50,7 +50,7 @@ function send_email(array $data, $status) {
 }
 
 function duplicateUsername($username, $pdo) {
-    $query = "SELECT 1 FROM members WHERE username = :username";
+    $query = "SELECT 1 FROM users WHERE username = :username";
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(':username', $username);
     $stmt->execute();
@@ -71,16 +71,28 @@ if (isset($submit) && $submit === 'enter') {
 
     $statusUsername = duplicateUsername($username, $pdo);
 
+    if (filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+        $emailStatus = true;
+    } else {
+        $emailStatus = false;
+        $errEmail = "Email Address is not a valid email address";
+    }
 
-    if (!$statusUsername) {
+    if (!$statusUsername && $emailStatus) {
         $status = confirmationNumber();
 
-        $result = $register->register($data, $status);
-        if ($result) {
-            $sentResult = send_email($data, $status);
-            unset($data);
-            header("Location: success.php");
-            exit;
+
+        if ($data['password'] === $data['repeatPassword']) {
+            $result = $register->register($data, $status);
+
+            if ($result) {
+                $sentResult = send_email($data, $status);
+                unset($data); // Delete User's Data:
+                header("Location: success.php");
+                exit;
+            } else {
+                $message = "Invalid Email Entry";
+            }
         } else {
             $errPassword = "Passwords did not match, please re-enter";
         }
@@ -108,13 +120,13 @@ if (isset($submit) && $submit === 'enter') {
                 <hr>
 
                 <label for="username"><b>Username <span class="unavailable"> - Not Available, please choose a different one.</span></b></label>
-                <input id="username" type="text" placeholder="<?php echo (isset($statusUsername) && $statusUsername) ? "Username is not available, please re-enter!" : "Enter Username"; ?>" name="data[username]" value="" autofocus required>
+                <input id="username" type="text" placeholder="<?php echo (isset($statusUsername) && $statusUsername) ? "Username is not available, please re-enter!" : "Enter Username"; ?>" name="data[username]" value="<?php echo (isset($data['username'])) ? $data['username'] : null; ?>" autofocus required>
 
-                <label for="email"><b>Email</b></label>
-                <input type="text" placeholder="Enter Email" name="data[email]" value="<?php echo (isset($data['email'])) ? $data['email'] : null; ?>" required>
+                <label for="email"><?php echo (isset($errEmail)) ? $errEmail : "<b>Email</b>"; ?></label>
+                <input type="email" placeholder="Enter Email" name="data[email]" value="<?php echo (isset($data['email'])) ? $data['email'] : null; ?>" required>
 
-                <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="data[password]" required>
+                <label for="psw"><b>Password <span class="recommendation">recommendation at least (8 characters long, 1 uppercasse letter, 1 number, and 1 special character)</span></b></label>
+                <input id="password" type="password" placeholder="Enter Password" name="data[password]" required>
 
                 <label for="psw-repeat"><b>Repeat Password</b></label>
                 <input type="password" placeholder="Repeat Password" name="data[repeatPassword]" required>

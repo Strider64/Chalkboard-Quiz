@@ -131,3 +131,23 @@ function before_every_protected_page() {
     confirm_session_is_valid();
 }
 
+/*
+ * Registration Functions
+ */
+
+//function strongPassword($password) {
+//    /*
+//     * Validate Strong Password
+//     */ 
+//    $uppercase = preg_match('@[A-Z]@', $password);
+//    $lowercase = preg_match('@[a-z]@', $password);
+//    $number = preg_match('@[0-9]@', $password);
+//    $specialChars = preg_match('@[^\w]@', $password);
+//
+//    if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 8) {
+//        return "Password recommendation at least (8 characters long, 1 uppercasse letter, 1 number, and 1 special character)";
+//    } else {
+//        return 'Password Strong';
+//    }
+//}
+
