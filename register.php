@@ -132,7 +132,7 @@ if (isset($submit) && $submit === 'enter') {
                 <input type="password" placeholder="Repeat Password" name="data[repeatPassword]" required>
                 <hr>
 
-                <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+                <p>By creating an account you agree to our <a href="termsPolicy.php">Terms & Privacy</a>.</p>
                 <input type="submit" name="submit" value="enter" class="registerbtn">
 
 

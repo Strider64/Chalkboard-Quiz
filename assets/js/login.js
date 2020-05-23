@@ -12,7 +12,7 @@ var loginData = {},
         loginInfo = document.querySelector('#loginInfo'),
         loginWelcome = document.querySelector('.welcome');
 
-startBtn.style.visibility = "hidden";
+//startBtn.style.visibility = "hidden";
 
 loginForm.style.display = "none";
 

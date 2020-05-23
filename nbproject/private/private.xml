@@ -3,18 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Applications/MAMP/htdocs/Chalkboard-Quiz/game.php</file>
+            <file>file:/Applications/MAMP/htdocs/Chalkboard-Quiz/checkName.php</file>
             <file>file:/Applications/MAMP/htdocs/Chalkboard-Quiz/loginFunctions.php</file>
-            <file>file:/Applications/MAMP/htdocs/Chalkboard-Quiz/assets/js/login.js</file>
-            <file>file:/Applications/MAMP/htdocs/Chalkboard-Quiz/sass/partials/_reset.scss</file>
-            <file>file:/Applications/MAMP/htdocs/Chalkboard-Quiz/register.php</file>
-            <file>file:/Applications/MAMP/htdocs/Chalkboard-Quiz/loginUser.php</file>
-            <file>file:/Applications/MAMP/htdocs/Chalkboard-Quiz/assets/js/game.js</file>
-            <file>file:/Applications/MAMP/htdocs/Chalkboard-Quiz/src/Users.php</file>
-            <file>file:/Applications/MAMP/htdocs/Chalkboard-Quiz/index.php</file>
-            <file>file:/Applications/MAMP/htdocs/Chalkboard-Quiz/assets/css/stylesheet.css</file>
+            <file>file:/Applications/MAMP/htdocs/Chalkboard-Quiz/activate.php</file>
+            <file>file:/Applications/MAMP/htdocs/Chalkboard-Quiz/termsPolicy.php</file>
             <file>file:/Applications/MAMP/htdocs/Chalkboard-Quiz/sass/stylesheet.scss</file>
-            <file>file:/Applications/MAMP/htdocs/Chalkboard-Quiz/assets/css/challenge_style.css</file>
+            <file>file:/Applications/MAMP/htdocs/Chalkboard-Quiz/assets/js/register.js</file>
+            <file>file:/Applications/MAMP/htdocs/Chalkboard-Quiz/assets/js/game.js</file>
+            <file>file:/Applications/MAMP/htdocs/Chalkboard-Quiz/register.php</file>
+            <file>file:/Applications/MAMP/htdocs/Chalkboard-Quiz/index.php</file>
         </group>
     </open-files>
 </project-private>

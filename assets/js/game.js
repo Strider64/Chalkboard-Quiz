@@ -62,7 +62,9 @@
             total = 0,
             answeredRight = 0,
             answeredWrong = 0,
-            choose = d.querySelector('#selectCat');
+            totalQuestions = 0,
+            choose = d.querySelector('#selectCat'),
+            failedLoad = false;
 
     var responseAns = {};
 
@@ -196,7 +198,7 @@
 
     /* If Database Table fails to load then hard code the correct answers */
     const checkUIError = function (error) {
-
+        console.log("Database Table did not load", error);
         switch (gameData[gameIndex].id) {
             case 1:
                 var correct = gameData[gameIndex].correct;
@@ -267,7 +269,7 @@
         next.removeEventListener('click', removeQuiz, false);
         gameIndex++;
 
-        if (gameIndex < parseInt(gameData.length)) {
+        if (gameIndex < totalQuestions) {
             createQuiz(gameData[gameIndex]); // Recreate the Quiz Display:
         } else {
             question.textContent = 'Game Over';
@@ -309,10 +311,12 @@
 
     /* Success function utilizing FETCH */
     const quizUISuccess = (parsedData) => {
-        console.log('Data', parsedData);
+        var temp = null;
         mainGame.style.display = 'block';
-        //gameData = parsedData.sort(() => Math.random() - .5); // randomize questions:
-        gameData = parsedData;
+        temp = parsedData.sort(() => Math.random() - .5); // randomize questions:     
+        gameData = temp.slice(0, 10);
+        console.log(gameData, gameData.length, temp.length);
+        totalQuestions = parseInt(gameData.length);
         createQuiz(gameData[gameIndex]);
 
     };
@@ -320,7 +324,7 @@
     /* If Database Table fails to load then answer a few hard coded Q&A */
     const quizUIError = (error) => {
         console.log("Database Table did not load", error);
-
+        console.log(failedLoad);
         gameData = [
             {
                 id: 1,
