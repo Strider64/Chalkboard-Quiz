@@ -3,8 +3,8 @@ require_once 'assets/config/config.php';
 require_once "vendor/autoload.php";
 require_once 'loginFunctions.php';
 
-//confirm_user_logged_in();
-//is_session_valid();
+confirm_user_logged_in();
+is_session_valid();
 
 //echo "<pre>" . print_r($_SESSION, 1) . "</pre>";
 

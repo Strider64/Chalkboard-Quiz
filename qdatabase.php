@@ -31,7 +31,7 @@ function readData($category, $pdo) {
     return $result;
 }
 
-/* Makes it so we don't have to decode the json coming from JQuery */
+/* Makes it so we don't have to decode the json coming from Javascript */
 header('Content-type: application/json');
 
 /*

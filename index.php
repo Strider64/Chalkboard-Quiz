@@ -47,7 +47,7 @@ $_SESSION['api_key'] = bin2hex(random_bytes(32)); // 64 characters long
                 <!--                <div id="startBtn">
                                     <a class="logo" id="customBtn" title="Start Button" href="game.php"><span>Start Button</span></a>
                                 </div>-->   
-                
+
                 <form id="gameLevel" action="index.php" method="post">
                     <select class="select-css" name="level" tabindex="1">
                         <option value="easy">Easy</option>
@@ -56,6 +56,7 @@ $_SESSION['api_key'] = bin2hex(random_bytes(32)); // 64 characters long
                     </select>
                     <a class="btn4" title="Start Button" href="game.php">Start</a>
                 </form>
+
 
                 <a id="loginMessage" title="Please Login" href="login.php">Login</a>
 

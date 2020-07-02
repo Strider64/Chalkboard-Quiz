@@ -75,7 +75,7 @@ class Users {
                 throw $e;
             }
         } catch (Exception $e) {
-            echo 'Caught exception: ', $e->getMessage(), "\n";
+            echo 'Caught exception: ', $e->getMessage(), "\n"; // Not for a production server:
         }
 
         return true;

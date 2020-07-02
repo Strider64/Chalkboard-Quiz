@@ -2,7 +2,7 @@
 
 require_once 'assets/config/config.php';
 
-/* Makes it so we don't have to decode the json coming from JQuery */
+/* Makes it so we don't have to decode the json coming from javascript */
 header('Content-type: application/json');
 
 /*

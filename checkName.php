@@ -32,7 +32,7 @@ function duplicateUsername($username, $pdo) {
             return false; // Username isn't in database table
         }
     } catch (PDOException $e) {
-        echo $e->getMessage();
+        echo $e->getMessage(); // Not for a Production Server
     }
 }
 
