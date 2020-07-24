@@ -40,7 +40,7 @@ const loginUISuccess = (parsedData) => {
     }
 };
 
-/* If Database Table fails to load then answer a few hard coded Q&A */
+/* If Database Table fails to load */
 const loginUIError = (error) => {
     console.log("Database Table did not load", error);
 }
